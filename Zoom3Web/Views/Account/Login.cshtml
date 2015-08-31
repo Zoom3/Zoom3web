@@ -1,0 +1,65 @@
+﻿@model Zoom3Web.Models.UserDataViewModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Entrar en Zoom3</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal well" style="color: black;">
+        <h4>Login Zoom3</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Email", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.US_Email, new { @class = "form-control", @placeholder = "usuario@email.com" })
+                @Html.ValidationMessageFor(model => model.US_Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Contraseña", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.US_Password, new { @class = "form-control", @placeholder = "Contraseña" })
+                @Html.ValidationMessageFor(model => model.US_Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.Label("Recordar Contraseña")
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink("He olvidado mi contraseña", "ForgotPassword", "Account")
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <a class="btn btn-success" href="~/Account/Register"> Nuevo Registro </a>
+                <input type="submit" value="Entrar" class="btn btn-info" />
+            </div>
+        </div>
+    </div>
+}
+
+
+@*<section class="social" id="socialLoginForm">
+    <h2>Use another service to log in.</h2>
+    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+</section>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

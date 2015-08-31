@@ -1,0 +1,27 @@
+﻿@model Zoom3Web.UserData
+
+@{
+    ViewBag.Title = "SandBox";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal well" style="color: black;">
+        <h4>Test</h4>
+        
+        <div class="form-group">
+            @Html.Label("Email", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.US_Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.US_Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Send" />
+            </div>
+        </div>
+
+    </div>
+}

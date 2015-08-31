@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - Zoom3</title>
+
+        <link href="~/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+        <script src="~/Scripts/jquery.js"></script>
+        <script src="~/Scripts/jquery-2.1.4.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <script src="~/Scripts/plugins/morris/morris-data.js"></script>
+        <script src="~/Scripts/plugins/morris/raphael.min.js"></script>
+        <script src="~/Scripts/plugins/morris/morris.min.js"></script>
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+   
+    </head>
+    <body>
+        <div id="wrapper">
+            <header>
+                <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="~/Home/Index"><img src="~/Images/Zoom3LogoWhite.gif" style="width:63%;" alt="Zoom3"/></a>
+                    </div>
+                    @Html.Partial("_LoginPartial")
+                    <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+                    
+                    <div class="collapse navbar-collapse navbar-ex1-collapse">
+                        
+                        <ul class="nav navbar-nav side-nav">
+                            <li><img src="~/Images/LogoWhiteZ.gif" width="100" class="logo-z" /></li>
+                            @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
+                            <li><a href="@Url.Action("Index", "Home")"><i class="fa fa-fw fa-home"></i>Inicio</a></li>
+                            <li class="dropdown">
+                                <a href="#" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Categories <i class="fa fa-fw fa-caret-down"></i></a>
+                                <ul id="demo" class="collapse">
+                                    <li>@Html.ActionLink("Más Populares", "Popular", "Categories")</li>
+                                    <li>@Html.ActionLink("Arquitectura", "Arquitecture", "Categories")</li>
+                                    <li>@Html.ActionLink("Arte", "Art", "Categories")</li>
+                                    <li>@Html.ActionLink("Cine", "Movies", "Categories")</li>
+                                    <li>@Html.ActionLink("Comida", "Food", "Categories")</li>
+                                    <li>@Html.ActionLink("Deporte", "Sport", "Categories")</li>
+                                    <li>@Html.ActionLink("Música", "Music", "Categories")</li>
+                                    <li>@Html.ActionLink("Naturaleza", "Nature", "Categories")</li>
+                                    <li>@Html.ActionLink("Paisajes", "Landscape", "Categories")</li>
+                                    <li>@Html.ActionLink("Personas", "People", "Categories")</li>
+                                    <li>@Html.ActionLink("Transporte", "Transport", "Categories")</li>
+                                    <li>@Html.ActionLink("Otros", "Other", "Categories")</li>
+                                    @*<li><a href="/Categories/GenericCategory/1">Más Populares</a></li>
+                                    <li><a href="/Categories/GenericCategory/3">Arquitectura</a></li>
+                                    <li><a href="/Categories/GenericCategory/4">Arte</a></li>
+                                    <li><a href="/Categories/GenericCategory/5">Cine</a></li>
+                                    <li><a href="/Categories/GenericCategory/6">Comida</a></li>
+                                    <li><a href="/Categories/GenericCategory/7">Deporte</a></li>
+                                    <li><a href="/Categories/GenericCategory/10">Música</a></li>
+                                    <li><a href="/Categories/GenericCategory/11">Naturaleza</a></li>
+                                    <li><a href="/Categories/GenericCategory/12">Paisajes</a></li>
+                                    <li><a href="/Categories/GenericCategory/13">Personas</a></li>
+                                    <li><a href="/Categories/GenericCategory/14">Transporte</a></li>
+                                    <li><a href="/Categories/GenericCategory/16">Otros</a></li>*@
+                                </ul>
+                            </li>
+                            @*<li>@Html.ActionLink("Market", "Market", "Market")</li>*@
+                            <li><a href="@Url.Action("Market", "Market")"><i class="fa fa-fw fa-dollar"></i>Market</a></li>
+                            @if (Session["UserName"] != null)
+                            {
+                                @*<li>@Html.ActionLink("UpLoad", "Upload", "Upload")</li>*@
+                                <li><a href="@Url.Action("UpLoad", "UpLoad")"><i class="fa fa-fw fa-upload"></i>Subir</a></li>
+                                @*<li>@Html.ActionLink("Favourites", "Favourites", "Favourites")</li>*@
+                                <li><a href="@Url.Action("Favourites", "Favourites")"><i class="fa fa-fw fa-star"></i>Favoritas</a></li>
+                                if (Convert.ToInt32(Session["Rol"]) == 2)
+                                {
+                                    <li class="dropdown">
+                                        <a href="#" data-toggle="collapse" data-target="#admin"><i class="fa fa-fw fa-wrench"></i>Administración<i class="fa fa-fw fa-caret-down"></i></a>
+                                        <ul id="admin" class="collapse">
+                                            <li>@Html.ActionLink("Administración de Usuarios", "AdminUsers", "Admin")</li>
+                                            <li>@Html.ActionLink("Administración de Fotos", "AdminPhotos", "Admin")</li>
+                                        </ul>
+                                    </li>
+                                   
+                                }
+                            }
+                            <li><a href="@Url.Action("FAQ", "Home")"><i class="fa fa-fw fa-question-circle"></i>FAQ</a></li>
+                            <li><a href="@Url.Action("Contact", "Home")"><i class="fa fa-fw fa-envelope-o"></i>Contacto</a></li>
+                        </ul>   
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </nav>
+            </header>
+            <div id="page-wrapper">
+                <div class="container-fluid">
+                    @RenderSection("featured", required: false)
+                    <section class="content-wrapper main-content clear-fix">
+                        @RenderBody()
+                    </section>
+                </div>
+            </div>
+            @*<footer>
+                <div class="content-wrapper">
+                    <div class="float-left">
+                        <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                    </div>
+                </div>
+            </footer>*@
+        </div>
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        
+    </body>
+
+</html>

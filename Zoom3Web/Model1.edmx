@@ -1,0 +1,959 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ZOOM3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="C_Id" />
+          </Key>
+          <Property Name="C_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="C_US_Id" Type="int" Nullable="false" />
+          <Property Name="C_PH_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CAT_Id" />
+          </Key>
+          <Property Name="CAT_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CAT_Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CreditCard">
+          <Key>
+            <PropertyRef Name="CC_Id" />
+          </Key>
+          <Property Name="CC_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CC_Number" Type="nvarchar" MaxLength="14" />
+          <Property Name="CC_CVV2" Type="int" />
+          <Property Name="CC_Name" Type="varchar" MaxLength="50" />
+          <Property Name="CC_Primary" Type="bit" />
+          <Property Name="CC_SaveCard" Type="bit" />
+          <Property Name="CC_CT_Id" Type="int" />
+          <Property Name="CC_U_Id" Type="int" Nullable="false" />
+          <Property Name="CC_AccountNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="CC_ExpiredMonth" Type="int" />
+          <Property Name="CC_ExpiredYear" Type="int" />
+        </EntityType>
+        <EntityType Name="CreditCardType">
+          <Key>
+            <PropertyRef Name="CT_Id" />
+          </Key>
+          <Property Name="CT_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CT_Type" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Email">
+          <Key>
+            <PropertyRef Name="E_Id" />
+          </Key>
+          <Property Name="E_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="E_Template" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Favourites">
+          <Key>
+            <PropertyRef Name="FAV_Id" />
+          </Key>
+          <Property Name="FAV_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FAV_PH_Id" Type="int" Nullable="false" />
+          <Property Name="FAV_US_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Likes">
+          <Key>
+            <PropertyRef Name="LIK_Id" />
+          </Key>
+          <Property Name="LIK_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LIK_US_Id" Type="int" Nullable="false" />
+          <Property Name="LIK_PH_Id" Type="int" Nullable="false" />
+          <Property Name="LIK_ButtonLike" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="NOT_Id" />
+          </Key>
+          <Property Name="NOT_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOT_U_Id" Type="int" Nullable="false" />
+          <Property Name="NOT_NT_Id" Type="int" Nullable="false" />
+          <Property Name="NOT_PH_Id" Type="int" Nullable="false" />
+          <Property Name="NOT_Leido" Type="bit" Nullable="false" />
+          <Property Name="NOT_Tittle" Type="nchar" MaxLength="10" />
+          <Property Name="NOT_Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="NOT_Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NotificationType">
+          <Key>
+            <PropertyRef Name="NT_Id" />
+          </Key>
+          <Property Name="NT_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NT_Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="PH_Id" />
+          </Key>
+          <Property Name="PH_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PH_Title" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="PH_Description" Type="nvarchar(max)" />
+          <Property Name="PH_Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PH_Favourites" Type="int" Nullable="false" />
+          <Property Name="PH_InCart" Type="bit" Nullable="false" />
+          <Property Name="PH_CAT_Id" Type="int" Nullable="false" />
+          <Property Name="PH_US_Id" Type="int" Nullable="false" />
+          <Property Name="PH_Image" Type="image" Nullable="false" />
+          <Property Name="PH_FileName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PH_UploadDate" Type="date" Nullable="false" />
+          <Property Name="PH_InMarket" Type="bit" Nullable="false" />
+          <Property Name="PH_Likes" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Purchases">
+          <Key>
+            <PropertyRef Name="PUR_Id" />
+          </Key>
+          <Property Name="PUR_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PUR_US_Id" Type="int" Nullable="false" />
+          <Property Name="PUR_PH_Id" Type="int" Nullable="false" />
+          <Property Name="PUR_DatePurchase" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="ROL_Id" />
+          </Key>
+          <Property Name="ROL_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ROL_Description" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserData">
+          <Key>
+            <PropertyRef Name="US_Id" />
+          </Key>
+          <Property Name="US_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="US_Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="US_Name" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="US_LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="US_Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="US_Birth" Type="date" />
+          <Property Name="US_Phone" Type="int" />
+          <Property Name="RememberMe" Type="bit" Nullable="false" />
+          <Property Name="US_ROL_Id" Type="int" Nullable="false" />
+          <Property Name="US_ConfirmPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="US_ImageProfile" Type="image" />
+          <Property Name="US_HasImage" Type="bit" Nullable="false" />
+          <Property Name="US_NewPassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="US_RegDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Cart_Photo">
+          <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PH_Id" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="C_PH_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CreditCard_CreditCardType">
+          <End Role="CreditCardType" Type="Self.CreditCardType" Multiplicity="0..1" />
+          <End Role="CreditCard" Type="Self.CreditCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CreditCardType">
+              <PropertyRef Name="CT_Id" />
+            </Principal>
+            <Dependent Role="CreditCard">
+              <PropertyRef Name="CC_CT_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CreditCard_User">
+          <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+          <End Role="CreditCard" Type="Self.CreditCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserData">
+              <PropertyRef Name="US_Id" />
+            </Principal>
+            <Dependent Role="CreditCard">
+              <PropertyRef Name="CC_U_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favourites_Photo">
+          <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
+          <End Role="Favourites" Type="Self.Favourites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PH_Id" />
+            </Principal>
+            <Dependent Role="Favourites">
+              <PropertyRef Name="FAV_PH_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_NotificationType">
+          <End Role="NotificationType" Type="Self.NotificationType" Multiplicity="1" />
+          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NotificationType">
+              <PropertyRef Name="NT_Id" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="NOT_NT_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_Photo">
+          <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
+          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PH_Id" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="NOT_PH_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_User">
+          <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserData">
+              <PropertyRef Name="US_Id" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="NOT_U_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photo_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CAT_Id" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="PH_CAT_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photo_User">
+          <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserData">
+              <PropertyRef Name="US_Id" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="PH_US_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Purchases_Photo">
+          <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
+          <End Role="Purchases" Type="Self.Purchases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PH_Id" />
+            </Principal>
+            <Dependent Role="Purchases">
+              <PropertyRef Name="PUR_PH_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserData_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="UserData" Type="Self.UserData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ROL_Id" />
+            </Principal>
+            <Dependent Role="UserData">
+              <PropertyRef Name="US_ROL_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="ZOOM3ModelStoreContainer">
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CreditCard" EntityType="Self.CreditCard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CreditCardType" EntityType="Self.CreditCardType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Email" EntityType="Self.Email" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Favourites" EntityType="Self.Favourites" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Likes" EntityType="Self.Likes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NotificationType" EntityType="Self.NotificationType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Photo" EntityType="Self.Photo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Purchases" EntityType="Self.Purchases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserData" EntityType="Self.UserData" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cart_Photo" Association="Self.FK_Cart_Photo">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CreditCard_CreditCardType" Association="Self.FK_CreditCard_CreditCardType">
+            <End Role="CreditCardType" EntitySet="CreditCardType" />
+            <End Role="CreditCard" EntitySet="CreditCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CreditCard_User" Association="Self.FK_CreditCard_User">
+            <End Role="UserData" EntitySet="UserData" />
+            <End Role="CreditCard" EntitySet="CreditCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favourites_Photo" Association="Self.FK_Favourites_Photo">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="Favourites" EntitySet="Favourites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_NotificationType" Association="Self.FK_Notifications_NotificationType">
+            <End Role="NotificationType" EntitySet="NotificationType" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_Photo" Association="Self.FK_Notifications_Photo">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_User" Association="Self.FK_Notifications_User">
+            <End Role="UserData" EntitySet="UserData" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photo_Category" Association="Self.FK_Photo_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Photo" EntitySet="Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photo_User" Association="Self.FK_Photo_User">
+            <End Role="UserData" EntitySet="UserData" />
+            <End Role="Photo" EntitySet="Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Purchases_Photo" Association="Self.FK_Purchases_Photo">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="Purchases" EntitySet="Purchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserData_Roles" Association="Self.FK_UserData_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserData" EntitySet="UserData" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ZOOM3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CAT_Id" />
+          </Key>
+          <Property Name="CAT_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CAT_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Photo" Relationship="ZOOM3Model.FK_Photo_Category" FromRole="Category" ToRole="Photo" />
+        </EntityType>
+        <EntityType Name="CreditCardType">
+          <Key>
+            <PropertyRef Name="CT_Id" />
+          </Key>
+          <Property Name="CT_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CT_Type" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CreditCard" Relationship="ZOOM3Model.FK_CreditCard_CreditCardType" FromRole="CreditCardType" ToRole="CreditCard" />
+        </EntityType>
+        <EntityType Name="Favourites">
+          <Key>
+            <PropertyRef Name="FAV_Id" />
+          </Key>
+          <Property Name="FAV_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FAV_PH_Id" Type="Int32" Nullable="false" />
+          <Property Name="FAV_US_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Photo" Relationship="ZOOM3Model.FK_Favourites_Photo" FromRole="Favourites" ToRole="Photo" />
+        </EntityType>
+        <EntityType Name="NotificationType">
+          <Key>
+            <PropertyRef Name="NT_Id" />
+          </Key>
+          <Property Name="NT_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NT_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Notifications" Relationship="ZOOM3Model.FK_Notifications_NotificationType" FromRole="NotificationType" ToRole="Notifications" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="ROL_Id" />
+          </Key>
+          <Property Name="ROL_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ROL_Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="UserData" Relationship="ZOOM3Model.FK_UserData_Roles" FromRole="Roles" ToRole="UserData" />
+        </EntityType>
+        <EntityContainer Name="ZOOM3Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="CreditCardType" EntityType="Self.CreditCardType" />
+          <EntitySet Name="Favourites" EntityType="Self.Favourites" />
+          <EntitySet Name="NotificationType" EntityType="Self.NotificationType" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ZOOM3Model.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(ZOOM3Model.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="Likes" EntityType="ZOOM3Model.Likes" />
+          <EntitySet Name="Photo" EntityType="ZOOM3Model.Photo" />
+          <AssociationSet Name="FK_Photo_Category" Association="ZOOM3Model.FK_Photo_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Photo" EntitySet="Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favourites_Photo" Association="ZOOM3Model.FK_Favourites_Photo">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="Favourites" EntitySet="Favourites" />
+          </AssociationSet>
+          <EntitySet Name="CreditCard" EntityType="ZOOM3Model.CreditCard" />
+          <AssociationSet Name="FK_CreditCard_CreditCardType" Association="ZOOM3Model.FK_CreditCard_CreditCardType">
+            <End Role="CreditCardType" EntitySet="CreditCardType" />
+            <End Role="CreditCard" EntitySet="CreditCard" />
+          </AssociationSet>
+          <EntitySet Name="Email" EntityType="ZOOM3Model.Email" />
+          <EntitySet Name="Notifications" EntityType="ZOOM3Model.Notifications" />
+          <EntitySet Name="Purchases" EntityType="ZOOM3Model.Purchases" />
+          <AssociationSet Name="FK_Notifications_NotificationType" Association="ZOOM3Model.FK_Notifications_NotificationType">
+            <End Role="NotificationType" EntitySet="NotificationType" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_Photo" Association="ZOOM3Model.FK_Notifications_Photo">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Purchases_Photo" Association="ZOOM3Model.FK_Purchases_Photo">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="Purchases" EntitySet="Purchases" />
+          </AssociationSet>
+          <EntitySet Name="UserData" EntityType="ZOOM3Model.UserData" />
+          <AssociationSet Name="FK_CreditCard_User" Association="ZOOM3Model.FK_CreditCard_User">
+            <End Role="UserData" EntitySet="UserData" />
+            <End Role="CreditCard" EntitySet="CreditCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_User" Association="ZOOM3Model.FK_Notifications_User">
+            <End Role="UserData" EntitySet="UserData" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photo_User" Association="ZOOM3Model.FK_Photo_User">
+            <End Role="UserData" EntitySet="UserData" />
+            <End Role="Photo" EntitySet="Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserData_Roles" Association="ZOOM3Model.FK_UserData_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserData" EntitySet="UserData" />
+          </AssociationSet>
+          <EntitySet Name="Cart" EntityType="ZOOM3Model.Cart" />
+          <AssociationSet Name="FK_Cart_Photo" Association="ZOOM3Model.FK_Cart_Photo">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Likes">
+          <Key>
+            <PropertyRef Name="LIK_Id" />
+          </Key>
+          <Property Name="LIK_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LIK_US_Id" Type="Int32" Nullable="false" />
+          <Property Name="LIK_PH_Id" Type="Int32" Nullable="false" />
+          <Property Name="LIK_ButtonLike" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="PH_Id" />
+          </Key>
+          <Property Name="PH_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PH_Title" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PH_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PH_Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PH_Favourites" Type="Int32" Nullable="false" />
+          <Property Name="PH_InCart" Type="Boolean" Nullable="false" />
+          <Property Name="PH_CAT_Id" Type="Int32" Nullable="false" />
+          <Property Name="PH_US_Id" Type="Int32" Nullable="false" />
+          <Property Name="PH_Image" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="PH_FileName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PH_UploadDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PH_InMarket" Type="Boolean" Nullable="false" />
+          <Property Name="PH_Likes" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="ZOOM3Model.FK_Photo_Category" FromRole="Photo" ToRole="Category" />
+          <NavigationProperty Name="Favourites" Relationship="ZOOM3Model.FK_Favourites_Photo" FromRole="Photo" ToRole="Favourites" />
+          <NavigationProperty Name="Notifications" Relationship="ZOOM3Model.FK_Notifications_Photo" FromRole="Photo" ToRole="Notifications" />
+          <NavigationProperty Name="Purchases" Relationship="ZOOM3Model.FK_Purchases_Photo" FromRole="Photo" ToRole="Purchases" />
+          <NavigationProperty Name="UserData" Relationship="ZOOM3Model.FK_Photo_User" FromRole="Photo" ToRole="UserData" />
+          <NavigationProperty Name="Cart" Relationship="ZOOM3Model.FK_Cart_Photo" FromRole="Photo" ToRole="Cart" />
+        </EntityType>
+        <Association Name="FK_Photo_Category">
+          <End Type="ZOOM3Model.Category" Role="Category" Multiplicity="1" />
+          <End Type="ZOOM3Model.Photo" Role="Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CAT_Id" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="PH_CAT_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favourites_Photo">
+          <End Type="ZOOM3Model.Photo" Role="Photo" Multiplicity="1" />
+          <End Type="ZOOM3Model.Favourites" Role="Favourites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PH_Id" />
+            </Principal>
+            <Dependent Role="Favourites">
+              <PropertyRef Name="FAV_PH_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CreditCard">
+          <Key>
+            <PropertyRef Name="CC_Id" />
+          </Key>
+          <Property Name="CC_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CC_Number" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="CC_CVV2" Type="Int32" />
+          <Property Name="CC_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CC_Primary" Type="Boolean" />
+          <Property Name="CC_SaveCard" Type="Boolean" />
+          <Property Name="CC_CT_Id" Type="Int32" />
+          <Property Name="CC_U_Id" Type="Int32" Nullable="false" />
+          <Property Name="CC_AccountNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CC_ExpiredMonth" Type="Int32" />
+          <Property Name="CC_ExpiredYear" Type="Int32" />
+          <NavigationProperty Name="CreditCardType" Relationship="ZOOM3Model.FK_CreditCard_CreditCardType" FromRole="CreditCard" ToRole="CreditCardType" />
+          <NavigationProperty Name="UserData" Relationship="ZOOM3Model.FK_CreditCard_User" FromRole="CreditCard" ToRole="UserData" />
+        </EntityType>
+        <Association Name="FK_CreditCard_CreditCardType">
+          <End Type="ZOOM3Model.CreditCardType" Role="CreditCardType" Multiplicity="0..1" />
+          <End Type="ZOOM3Model.CreditCard" Role="CreditCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CreditCardType">
+              <PropertyRef Name="CT_Id" />
+            </Principal>
+            <Dependent Role="CreditCard">
+              <PropertyRef Name="CC_CT_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Email">
+          <Key>
+            <PropertyRef Name="E_Id" />
+          </Key>
+          <Property Name="E_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="E_Template" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="NOT_Id" />
+          </Key>
+          <Property Name="NOT_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOT_U_Id" Type="Int32" Nullable="false" />
+          <Property Name="NOT_NT_Id" Type="Int32" Nullable="false" />
+          <Property Name="NOT_PH_Id" Type="Int32" Nullable="false" />
+          <Property Name="NOT_Leido" Type="Boolean" Nullable="false" />
+          <Property Name="NOT_Tittle" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="NOT_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NOT_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="NotificationType" Relationship="ZOOM3Model.FK_Notifications_NotificationType" FromRole="Notifications" ToRole="NotificationType" />
+          <NavigationProperty Name="Photo" Relationship="ZOOM3Model.FK_Notifications_Photo" FromRole="Notifications" ToRole="Photo" />
+          <NavigationProperty Name="UserData" Relationship="ZOOM3Model.FK_Notifications_User" FromRole="Notifications" ToRole="UserData" />
+        </EntityType>
+        <EntityType Name="Purchases">
+          <Key>
+            <PropertyRef Name="PUR_Id" />
+          </Key>
+          <Property Name="PUR_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PUR_US_Id" Type="Int32" Nullable="false" />
+          <Property Name="PUR_PH_Id" Type="Int32" Nullable="false" />
+          <Property Name="PUR_DatePurchase" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Photo" Relationship="ZOOM3Model.FK_Purchases_Photo" FromRole="Purchases" ToRole="Photo" />
+        </EntityType>
+        <Association Name="FK_Notifications_NotificationType">
+          <End Type="ZOOM3Model.NotificationType" Role="NotificationType" Multiplicity="1" />
+          <End Type="ZOOM3Model.Notifications" Role="Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NotificationType">
+              <PropertyRef Name="NT_Id" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="NOT_NT_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_Photo">
+          <End Type="ZOOM3Model.Photo" Role="Photo" Multiplicity="1" />
+          <End Type="ZOOM3Model.Notifications" Role="Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PH_Id" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="NOT_PH_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Purchases_Photo">
+          <End Type="ZOOM3Model.Photo" Role="Photo" Multiplicity="1" />
+          <End Type="ZOOM3Model.Purchases" Role="Purchases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PH_Id" />
+            </Principal>
+            <Dependent Role="Purchases">
+              <PropertyRef Name="PUR_PH_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserData">
+          <Key>
+            <PropertyRef Name="US_Id" />
+          </Key>
+          <Property Name="US_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="US_Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="US_Name" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="US_LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="US_Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="US_Birth" Type="DateTime" Precision="0" />
+          <Property Name="US_Phone" Type="Int32" />
+          <Property Name="RememberMe" Type="Boolean" Nullable="false" />
+          <Property Name="US_ROL_Id" Type="Int32" Nullable="false" />
+          <Property Name="US_ConfirmPassword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="US_ImageProfile" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="US_HasImage" Type="Boolean" Nullable="false" />
+          <Property Name="US_NewPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="US_RegDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CreditCard" Relationship="ZOOM3Model.FK_CreditCard_User" FromRole="UserData" ToRole="CreditCard" />
+          <NavigationProperty Name="Notifications" Relationship="ZOOM3Model.FK_Notifications_User" FromRole="UserData" ToRole="Notifications" />
+          <NavigationProperty Name="Photo" Relationship="ZOOM3Model.FK_Photo_User" FromRole="UserData" ToRole="Photo" />
+          <NavigationProperty Name="Roles" Relationship="ZOOM3Model.FK_UserData_Roles" FromRole="UserData" ToRole="Roles" />
+        </EntityType>
+        <Association Name="FK_CreditCard_User">
+          <End Type="ZOOM3Model.UserData" Role="UserData" Multiplicity="1" />
+          <End Type="ZOOM3Model.CreditCard" Role="CreditCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserData">
+              <PropertyRef Name="US_Id" />
+            </Principal>
+            <Dependent Role="CreditCard">
+              <PropertyRef Name="CC_U_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_User">
+          <End Type="ZOOM3Model.UserData" Role="UserData" Multiplicity="1" />
+          <End Type="ZOOM3Model.Notifications" Role="Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserData">
+              <PropertyRef Name="US_Id" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="NOT_U_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photo_User">
+          <End Type="ZOOM3Model.UserData" Role="UserData" Multiplicity="1" />
+          <End Type="ZOOM3Model.Photo" Role="Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserData">
+              <PropertyRef Name="US_Id" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="PH_US_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserData_Roles">
+          <End Type="ZOOM3Model.Roles" Role="Roles" Multiplicity="1" />
+          <End Type="ZOOM3Model.UserData" Role="UserData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ROL_Id" />
+            </Principal>
+            <Dependent Role="UserData">
+              <PropertyRef Name="US_ROL_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="C_Id" />
+          </Key>
+          <Property Name="C_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="C_US_Id" Type="Int32" Nullable="false" />
+          <Property Name="C_PH_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Photo" Relationship="ZOOM3Model.FK_Cart_Photo" FromRole="Cart" ToRole="Photo" />
+        </EntityType>
+        <Association Name="FK_Cart_Photo">
+          <End Type="ZOOM3Model.Photo" Role="Photo" Multiplicity="1" />
+          <End Type="ZOOM3Model.Cart" Role="Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="PH_Id" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="C_PH_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ZOOM3ModelStoreContainer" CdmEntityContainer="ZOOM3Entities">
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="ZOOM3Model.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CAT_Id" ColumnName="CAT_Id" />
+                <ScalarProperty Name="CAT_Description" ColumnName="CAT_Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CreditCardType">
+            <EntityTypeMapping TypeName="ZOOM3Model.CreditCardType">
+              <MappingFragment StoreEntitySet="CreditCardType">
+                <ScalarProperty Name="CT_Id" ColumnName="CT_Id" />
+                <ScalarProperty Name="CT_Type" ColumnName="CT_Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Favourites">
+            <EntityTypeMapping TypeName="ZOOM3Model.Favourites">
+              <MappingFragment StoreEntitySet="Favourites">
+                <ScalarProperty Name="FAV_US_Id" ColumnName="FAV_US_Id" />
+                <ScalarProperty Name="FAV_Id" ColumnName="FAV_Id" />
+                <ScalarProperty Name="FAV_PH_Id" ColumnName="FAV_PH_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NotificationType">
+            <EntityTypeMapping TypeName="ZOOM3Model.NotificationType">
+              <MappingFragment StoreEntitySet="NotificationType">
+                <ScalarProperty Name="NT_Id" ColumnName="NT_Id" />
+                <ScalarProperty Name="NT_Type" ColumnName="NT_Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="ZOOM3Model.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="ROL_Id" ColumnName="ROL_Id" />
+                <ScalarProperty Name="ROL_Description" ColumnName="ROL_Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ZOOM3Model.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ZOOM3Model.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ZOOM3Model.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="ZOOM3Model.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ZOOM3Model.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="ZOOM3Model.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ZOOM3Model.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ZOOM3Model.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ZOOM3Model.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="Likes">
+            <EntityTypeMapping TypeName="ZOOM3Model.Likes">
+              <MappingFragment StoreEntitySet="Likes">
+                <ScalarProperty Name="LIK_ButtonLike" ColumnName="LIK_ButtonLike" />
+                <ScalarProperty Name="LIK_PH_Id" ColumnName="LIK_PH_Id" />
+                <ScalarProperty Name="LIK_US_Id" ColumnName="LIK_US_Id" />
+                <ScalarProperty Name="LIK_Id" ColumnName="LIK_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Photo">
+            <EntityTypeMapping TypeName="ZOOM3Model.Photo">
+              <MappingFragment StoreEntitySet="Photo">
+                <ScalarProperty Name="PH_Likes" ColumnName="PH_Likes" />
+                <ScalarProperty Name="PH_InMarket" ColumnName="PH_InMarket" />
+                <ScalarProperty Name="PH_UploadDate" ColumnName="PH_UploadDate" />
+                <ScalarProperty Name="PH_FileName" ColumnName="PH_FileName" />
+                <ScalarProperty Name="PH_Image" ColumnName="PH_Image" />
+                <ScalarProperty Name="PH_US_Id" ColumnName="PH_US_Id" />
+                <ScalarProperty Name="PH_CAT_Id" ColumnName="PH_CAT_Id" />
+                <ScalarProperty Name="PH_InCart" ColumnName="PH_InCart" />
+                <ScalarProperty Name="PH_Favourites" ColumnName="PH_Favourites" />
+                <ScalarProperty Name="PH_Price" ColumnName="PH_Price" />
+                <ScalarProperty Name="PH_Description" ColumnName="PH_Description" />
+                <ScalarProperty Name="PH_Title" ColumnName="PH_Title" />
+                <ScalarProperty Name="PH_Id" ColumnName="PH_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CreditCard">
+            <EntityTypeMapping TypeName="ZOOM3Model.CreditCard">
+              <MappingFragment StoreEntitySet="CreditCard">
+                <ScalarProperty Name="CC_ExpiredYear" ColumnName="CC_ExpiredYear" />
+                <ScalarProperty Name="CC_ExpiredMonth" ColumnName="CC_ExpiredMonth" />
+                <ScalarProperty Name="CC_AccountNumber" ColumnName="CC_AccountNumber" />
+                <ScalarProperty Name="CC_U_Id" ColumnName="CC_U_Id" />
+                <ScalarProperty Name="CC_CT_Id" ColumnName="CC_CT_Id" />
+                <ScalarProperty Name="CC_SaveCard" ColumnName="CC_SaveCard" />
+                <ScalarProperty Name="CC_Primary" ColumnName="CC_Primary" />
+                <ScalarProperty Name="CC_Name" ColumnName="CC_Name" />
+                <ScalarProperty Name="CC_CVV2" ColumnName="CC_CVV2" />
+                <ScalarProperty Name="CC_Number" ColumnName="CC_Number" />
+                <ScalarProperty Name="CC_Id" ColumnName="CC_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Email">
+            <EntityTypeMapping TypeName="ZOOM3Model.Email">
+              <MappingFragment StoreEntitySet="Email">
+                <ScalarProperty Name="E_Template" ColumnName="E_Template" />
+                <ScalarProperty Name="E_Id" ColumnName="E_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="ZOOM3Model.Notifications">
+              <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="NOT_Date" ColumnName="NOT_Date" />
+                <ScalarProperty Name="NOT_Description" ColumnName="NOT_Description" />
+                <ScalarProperty Name="NOT_Tittle" ColumnName="NOT_Tittle" />
+                <ScalarProperty Name="NOT_Leido" ColumnName="NOT_Leido" />
+                <ScalarProperty Name="NOT_PH_Id" ColumnName="NOT_PH_Id" />
+                <ScalarProperty Name="NOT_NT_Id" ColumnName="NOT_NT_Id" />
+                <ScalarProperty Name="NOT_U_Id" ColumnName="NOT_U_Id" />
+                <ScalarProperty Name="NOT_Id" ColumnName="NOT_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Purchases">
+            <EntityTypeMapping TypeName="ZOOM3Model.Purchases">
+              <MappingFragment StoreEntitySet="Purchases">
+                <ScalarProperty Name="PUR_DatePurchase" ColumnName="PUR_DatePurchase" />
+                <ScalarProperty Name="PUR_PH_Id" ColumnName="PUR_PH_Id" />
+                <ScalarProperty Name="PUR_US_Id" ColumnName="PUR_US_Id" />
+                <ScalarProperty Name="PUR_Id" ColumnName="PUR_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserData">
+            <EntityTypeMapping TypeName="ZOOM3Model.UserData">
+              <MappingFragment StoreEntitySet="UserData">
+                <ScalarProperty Name="US_RegDate" ColumnName="US_RegDate" />
+                <ScalarProperty Name="US_NewPassword" ColumnName="US_NewPassword" />
+                <ScalarProperty Name="US_HasImage" ColumnName="US_HasImage" />
+                <ScalarProperty Name="US_ImageProfile" ColumnName="US_ImageProfile" />
+                <ScalarProperty Name="US_ConfirmPassword" ColumnName="US_ConfirmPassword" />
+                <ScalarProperty Name="US_ROL_Id" ColumnName="US_ROL_Id" />
+                <ScalarProperty Name="RememberMe" ColumnName="RememberMe" />
+                <ScalarProperty Name="US_Phone" ColumnName="US_Phone" />
+                <ScalarProperty Name="US_Birth" ColumnName="US_Birth" />
+                <ScalarProperty Name="US_Password" ColumnName="US_Password" />
+                <ScalarProperty Name="US_LastName" ColumnName="US_LastName" />
+                <ScalarProperty Name="US_Name" ColumnName="US_Name" />
+                <ScalarProperty Name="US_Email" ColumnName="US_Email" />
+                <ScalarProperty Name="US_Id" ColumnName="US_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cart">
+            <EntityTypeMapping TypeName="ZOOM3Model.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="C_PH_Id" ColumnName="C_PH_Id" />
+                <ScalarProperty Name="C_US_Id" ColumnName="C_US_Id" />
+                <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

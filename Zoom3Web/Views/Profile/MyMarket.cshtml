@@ -1,0 +1,36 @@
+﻿@model Zoom3Web.UserData
+@{
+    ViewBag.Title = "Mis Fotos en Venta";
+}
+
+@Html.Partial("_ProfileMenu")
+
+<section id="photoContainer">
+
+    @foreach (var i in Model.Photo)
+    {
+        <div class="col-xs-6 col-md-3">
+            <a href="#">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h4>@i.PH_Title</h4>
+                        <p>
+                            <a href="~/Photo/PhotosByProfileViewer/@Model.US_Id" rel="group1" class="label label-default" rel="tooltip" title="Zoom">Zoom</a>
+                            <a href="~/Profile/EditImage/@i.PH_Id" class="label label-success" rel="tooltip" title="Edit">Editar</a>
+                            <a href="@Url.Action("DeleteImage", "Profile", new { id = i.PH_Id })" class="label label-danger" rel="tooltip" title="Delete">Eliminar</a>
+                        </p>
+                    </div>
+                    <img src="@Url.Action("GetImage", "Home", new { id = i.PH_Id })" alt="@i.PH_Title" />
+                </div>
+            </a>
+        </div>
+
+    }
+
+</section>
+
+<style>
+    section#photoContainer {
+        margin-top: -22px;
+    }
+</style>

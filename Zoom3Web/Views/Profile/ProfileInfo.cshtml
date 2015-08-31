@@ -1,0 +1,85 @@
+﻿@model Zoom3Web.UserData
+@{
+    ViewBag.Title = "Información de Perfil";
+}
+
+@Html.Partial("_ProfileMenu")
+
+    <fieldset class="profile-container">
+    <legend>Información de Usuario</legend>
+    <div class="profile-left col-md-7">
+
+        <dl>
+            <dt>@Html.DisplayName("Email")</dt>
+            <dd>@Html.DisplayFor(model => model.US_Email)</dd>
+
+            <dt>@Html.DisplayName("Nombre")</dt>
+            <dd>@Html.DisplayFor(model => model.US_Name)</dd>
+
+            <dt>@Html.DisplayName("Apellido")</dt>
+            <dd>@Html.DisplayFor(model => model.US_LastName)</dd>
+
+            <dt>@Html.DisplayName("Fecha Nacimiento")</dt>
+            <dd>@Html.DisplayFor(model => model.US_Birth)<span style="color:white;">.</span></dd>
+
+            <dt>@Html.DisplayName("Teléfono")</dt>
+            <dd>@Html.DisplayFor(model => model.US_Phone)</dd>
+        </dl> 
+      
+    </div>
+    <div class="profile-right col-md-5">
+        <p>@Html.ActionLink("Editar", "EditProfile", "", new { /* id=Model.PrimaryKey, */@class = "btn btn-info" }) </p>
+        <p>@Html.ActionLink("Cambia Contraseña", "ChangePassword", "" , new { /* id=Model.PrimaryKey, */@class = "btn btn-info" }) </p>
+        <p>@Html.ActionLink("Info Bancaria", "CreditCardInfo", "", new { /* id=Model.PrimaryKey, */@class = "btn btn-info" }) </p>
+        <p><a href="@Url.Action("DeleteProfile", "Profile", new { id = Model.US_Id })" class="btn btn-danger" title="Delete">Eliminar Perfil</a>
+</p>
+    </div>
+</fieldset>
+
+@*@foreach (var c in Model.CreditCard)
+{
+    <fieldset class="profile-container">
+        <legend>Datos Bancarios</legend>
+        <div class="profile-left col-md-7">
+            <h3>Información Tarjeta de Crédito</h3>
+            <hr />
+            <dl>
+                <dt>@Html.DisplayName("Titular")</dt>
+                <dd>@Html.Display(c.CC_Name)</dd>
+
+                <dt>@Html.DisplayName("Tarjeta")</dt>
+                <dd>@Html.Display(c.CreditCardType.CT_Type)</dd>
+
+                <dt>@Html.DisplayName("Número de Tarjeta")</dt>
+                <dd>@c.CC_Number</dd>
+
+                <dt>@Html.DisplayName("Caducidad (Mes/Año)")</dt>
+                <dd>@c.CC_ExpiredMonth</dd>
+                <dd>@c.CC_ExpiredYear</dd>
+
+                <dt>@Html.DisplayName("CVV")</dt>
+                <dd>@c.CC_CVV2<span style="color:white;">.</span></dd>
+
+            </dl>
+            <hr />
+            <h3>Número de Cuenta</h3>
+            <hr />
+            <dl>
+
+                <dt>@Html.DisplayName("Número de Cuenta")</dt>
+                <dd>@c.CC_AccountNumber</dd>
+
+            </dl>
+        </div>
+        <div class="profile-right col-md-5">
+            <p>@Html.ActionLink("Editar Tarjeta", "EditCreditCard", "", new { /* id=Model.PrimaryKey, */@class = "btn btn-info" }) </p>
+            <p>@Html.ActionLink("Editar Número de Cuenta", "EditAccountNumber", "", new { /* id=Model.PrimaryKey, */@class = "btn btn-info" }) </p>
+            <p>
+                <a href="@Url.Action("DeleteCreditCard", "Profile", new { id = c.CC_Id })" class="btn btn-danger" title="Delete">Eliminar Tarjeta</a>
+                <a href="@Url.Action("DeleteAccountNumber", "Profile", new { id = c.CC_Id })" class="btn btn-danger" title="Delete">Eliminar Cuenta</a>
+            </p>
+        </div>
+    </fieldset>
+}*@
+
+

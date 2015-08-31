@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8676d33dcb3540cbbc01c99d2da4a8b3" Name="Diagram1" ZoomLevel="77">
+        <EntityTypeShape EntityType="ZOOM3Model.Category" Width="1.5" PointX="12.375" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZOOM3Model.CreditCardType" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZOOM3Model.Favourites" Width="1.5" PointX="12.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZOOM3Model.NotificationType" Width="1.5" PointX="4.625" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZOOM3Model.Roles" Width="1.5" PointX="2.375" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZOOM3Model.Likes" Width="1.5" PointX="14.75" PointY="0.5" />
+        <EntityTypeShape EntityType="ZOOM3Model.Photo" Width="1.5" PointX="9.5" PointY="0.5" />
+        <AssociationConnector Association="ZOOM3Model.FK_Photo_Category" />
+        <AssociationConnector Association="ZOOM3Model.FK_Favourites_Photo" />
+        <EntityTypeShape EntityType="ZOOM3Model.CreditCard" Width="1.5" PointX="2.625" PointY="0.5" />
+        <AssociationConnector Association="ZOOM3Model.FK_CreditCard_CreditCardType" />
+        <EntityTypeShape EntityType="ZOOM3Model.Email" Width="1.5" PointX="14.75" PointY="2.75" />
+        <EntityTypeShape EntityType="ZOOM3Model.Notifications" Width="1.5" PointX="7.25" PointY="3.875" />
+        <EntityTypeShape EntityType="ZOOM3Model.Purchases" Width="1.5" PointX="9.5" PointY="5.5" />
+        <AssociationConnector Association="ZOOM3Model.FK_Notifications_NotificationType" />
+        <AssociationConnector Association="ZOOM3Model.FK_Notifications_Photo" />
+        <AssociationConnector Association="ZOOM3Model.FK_Purchases_Photo" />
+        <EntityTypeShape EntityType="ZOOM3Model.UserData" Width="1.5" PointX="5" PointY="0.5" />
+        <AssociationConnector Association="ZOOM3Model.FK_CreditCard_User" />
+        <AssociationConnector Association="ZOOM3Model.FK_Notifications_User" />
+        <AssociationConnector Association="ZOOM3Model.FK_Photo_User" />
+        <AssociationConnector Association="ZOOM3Model.FK_UserData_Roles" />
+        <EntityTypeShape EntityType="ZOOM3Model.Cart" Width="1.5" PointX="12.375" PointY="2.625" />
+        <AssociationConnector Association="ZOOM3Model.FK_Cart_Photo" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

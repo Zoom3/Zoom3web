@@ -1,0 +1,46 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<Zoom3Web.UserData>
+@{
+    ViewBag.Title = "Administración de Usuarios";
+}
+
+<section class="user-admin">
+    <h2>Administración de Usuarios</h2>
+    <hr />
+
+    <table class="table-responsive table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Fotos</th>
+                <th>Compras</th>
+                <th>Teléfono</th>
+                <th>Fecha Nac.</th>
+                <th>Rol</th>
+                <th></th>
+            </tr>
+        </thead>
+        @foreach(var us in Model){
+            <tr>
+                <td>@us.US_Id</td>
+                <td>@us.US_Name</td>
+                <td>@us.US_LastName</td>
+                <td>@us.Photo.Count()</td>
+                <td>@ViewBag.purchases</td>
+                <td>@us.US_Phone</td>
+                <td>@us.US_Birth</td>
+                <td>@us.Roles.ROL_Description</td>
+                <td><a href="@Url.Action("DeleteUser", "AdminUsers", new { id = us.US_Id })" class="btn btn-danger">Eliminar</a></td>
+            </tr>
+        }
+
+    </table>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("AdminUsers",
+    new { page }))
+</section>
+
+

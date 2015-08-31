@@ -1,0 +1,78 @@
+﻿@model Zoom3Web.UserData
+
+@{
+    ViewBag.Title = "Editar Perfil";
+}
+@Html.Partial("_ProfileMenu")
+<div class="form-horizontal">
+    @using (Html.BeginForm())
+    { @Html.AntiForgeryToken()  @Html.ValidationSummary(true)    <fieldset class="profile-container">
+        <legend>Datos Usuario</legend>
+
+        <div class="form-group">
+            @Html.Label("Email", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.US_Email, new { @class = "form-control", @placeholder = "Email" })
+                @Html.ValidationMessageFor(model => model.US_Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Nombre", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.US_Name, new { @class = "form-control", @placeholder = "Nombre" })
+                @Html.ValidationMessageFor(model => model.US_Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Apellido", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.US_LastName, new { @class = "form-control", @placeholder = "Apellido" })
+                @Html.ValidationMessageFor(model => model.US_LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Fecha Nacimiento", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.US_Birth, new { @class = "form-control datepicker", @placeholder = "dd/mm/aaaa" })
+                @Html.ValidationMessageFor(model => model.US_Birth, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Teléfono", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.US_Phone, new { @class = "form-control", @placeholder = "Teléfono" })
+                @Html.ValidationMessageFor(model => model.US_Phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.US_ImageProfile, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="US_ImageProfile" id="US_ImageProfile" style="width: 100%;" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar Cambios" class="btn btn-success" />
+                @Html.ActionLink("Volver", "ProfileInfo", "", new { @class = "btn btn-default" })
+             </div>
+        </div>
+
+    </fieldset>
+    }
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+       $('.datepicker').datepicker();
+    });
+</script>

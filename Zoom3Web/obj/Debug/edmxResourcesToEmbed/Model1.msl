@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ZOOM3ModelStoreContainer" CdmEntityContainer="ZOOM3Entities">
+    <EntitySetMapping Name="Category">
+      <EntityTypeMapping TypeName="ZOOM3Model.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="CAT_Id" ColumnName="CAT_Id" />
+          <ScalarProperty Name="CAT_Description" ColumnName="CAT_Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CreditCardType">
+      <EntityTypeMapping TypeName="ZOOM3Model.CreditCardType">
+        <MappingFragment StoreEntitySet="CreditCardType">
+          <ScalarProperty Name="CT_Id" ColumnName="CT_Id" />
+          <ScalarProperty Name="CT_Type" ColumnName="CT_Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Favourites">
+      <EntityTypeMapping TypeName="ZOOM3Model.Favourites">
+        <MappingFragment StoreEntitySet="Favourites">
+          <ScalarProperty Name="FAV_US_Id" ColumnName="FAV_US_Id" />
+          <ScalarProperty Name="FAV_Id" ColumnName="FAV_Id" />
+          <ScalarProperty Name="FAV_PH_Id" ColumnName="FAV_PH_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NotificationType">
+      <EntityTypeMapping TypeName="ZOOM3Model.NotificationType">
+        <MappingFragment StoreEntitySet="NotificationType">
+          <ScalarProperty Name="NT_Id" ColumnName="NT_Id" />
+          <ScalarProperty Name="NT_Type" ColumnName="NT_Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="ZOOM3Model.Roles">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="ROL_Id" ColumnName="ROL_Id" />
+          <ScalarProperty Name="ROL_Description" ColumnName="ROL_Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ZOOM3Model.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ZOOM3Model.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ZOOM3Model.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="ZOOM3Model.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ZOOM3Model.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="ZOOM3Model.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ZOOM3Model.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ZOOM3Model.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ZOOM3Model.Store.sp_upgraddiagrams" />
+    <EntitySetMapping Name="Likes">
+      <EntityTypeMapping TypeName="ZOOM3Model.Likes">
+        <MappingFragment StoreEntitySet="Likes">
+          <ScalarProperty Name="LIK_ButtonLike" ColumnName="LIK_ButtonLike" />
+          <ScalarProperty Name="LIK_PH_Id" ColumnName="LIK_PH_Id" />
+          <ScalarProperty Name="LIK_US_Id" ColumnName="LIK_US_Id" />
+          <ScalarProperty Name="LIK_Id" ColumnName="LIK_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Photo">
+      <EntityTypeMapping TypeName="ZOOM3Model.Photo">
+        <MappingFragment StoreEntitySet="Photo">
+          <ScalarProperty Name="PH_Likes" ColumnName="PH_Likes" />
+          <ScalarProperty Name="PH_InMarket" ColumnName="PH_InMarket" />
+          <ScalarProperty Name="PH_UploadDate" ColumnName="PH_UploadDate" />
+          <ScalarProperty Name="PH_FileName" ColumnName="PH_FileName" />
+          <ScalarProperty Name="PH_Image" ColumnName="PH_Image" />
+          <ScalarProperty Name="PH_US_Id" ColumnName="PH_US_Id" />
+          <ScalarProperty Name="PH_CAT_Id" ColumnName="PH_CAT_Id" />
+          <ScalarProperty Name="PH_InCart" ColumnName="PH_InCart" />
+          <ScalarProperty Name="PH_Favourites" ColumnName="PH_Favourites" />
+          <ScalarProperty Name="PH_Price" ColumnName="PH_Price" />
+          <ScalarProperty Name="PH_Description" ColumnName="PH_Description" />
+          <ScalarProperty Name="PH_Title" ColumnName="PH_Title" />
+          <ScalarProperty Name="PH_Id" ColumnName="PH_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CreditCard">
+      <EntityTypeMapping TypeName="ZOOM3Model.CreditCard">
+        <MappingFragment StoreEntitySet="CreditCard">
+          <ScalarProperty Name="CC_ExpiredYear" ColumnName="CC_ExpiredYear" />
+          <ScalarProperty Name="CC_ExpiredMonth" ColumnName="CC_ExpiredMonth" />
+          <ScalarProperty Name="CC_AccountNumber" ColumnName="CC_AccountNumber" />
+          <ScalarProperty Name="CC_U_Id" ColumnName="CC_U_Id" />
+          <ScalarProperty Name="CC_CT_Id" ColumnName="CC_CT_Id" />
+          <ScalarProperty Name="CC_SaveCard" ColumnName="CC_SaveCard" />
+          <ScalarProperty Name="CC_Primary" ColumnName="CC_Primary" />
+          <ScalarProperty Name="CC_Name" ColumnName="CC_Name" />
+          <ScalarProperty Name="CC_CVV2" ColumnName="CC_CVV2" />
+          <ScalarProperty Name="CC_Number" ColumnName="CC_Number" />
+          <ScalarProperty Name="CC_Id" ColumnName="CC_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Email">
+      <EntityTypeMapping TypeName="ZOOM3Model.Email">
+        <MappingFragment StoreEntitySet="Email">
+          <ScalarProperty Name="E_Template" ColumnName="E_Template" />
+          <ScalarProperty Name="E_Id" ColumnName="E_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notifications">
+      <EntityTypeMapping TypeName="ZOOM3Model.Notifications">
+        <MappingFragment StoreEntitySet="Notifications">
+          <ScalarProperty Name="NOT_Date" ColumnName="NOT_Date" />
+          <ScalarProperty Name="NOT_Description" ColumnName="NOT_Description" />
+          <ScalarProperty Name="NOT_Tittle" ColumnName="NOT_Tittle" />
+          <ScalarProperty Name="NOT_Leido" ColumnName="NOT_Leido" />
+          <ScalarProperty Name="NOT_PH_Id" ColumnName="NOT_PH_Id" />
+          <ScalarProperty Name="NOT_NT_Id" ColumnName="NOT_NT_Id" />
+          <ScalarProperty Name="NOT_U_Id" ColumnName="NOT_U_Id" />
+          <ScalarProperty Name="NOT_Id" ColumnName="NOT_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Purchases">
+      <EntityTypeMapping TypeName="ZOOM3Model.Purchases">
+        <MappingFragment StoreEntitySet="Purchases">
+          <ScalarProperty Name="PUR_DatePurchase" ColumnName="PUR_DatePurchase" />
+          <ScalarProperty Name="PUR_PH_Id" ColumnName="PUR_PH_Id" />
+          <ScalarProperty Name="PUR_US_Id" ColumnName="PUR_US_Id" />
+          <ScalarProperty Name="PUR_Id" ColumnName="PUR_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserData">
+      <EntityTypeMapping TypeName="ZOOM3Model.UserData">
+        <MappingFragment StoreEntitySet="UserData">
+          <ScalarProperty Name="US_RegDate" ColumnName="US_RegDate" />
+          <ScalarProperty Name="US_NewPassword" ColumnName="US_NewPassword" />
+          <ScalarProperty Name="US_HasImage" ColumnName="US_HasImage" />
+          <ScalarProperty Name="US_ImageProfile" ColumnName="US_ImageProfile" />
+          <ScalarProperty Name="US_ConfirmPassword" ColumnName="US_ConfirmPassword" />
+          <ScalarProperty Name="US_ROL_Id" ColumnName="US_ROL_Id" />
+          <ScalarProperty Name="RememberMe" ColumnName="RememberMe" />
+          <ScalarProperty Name="US_Phone" ColumnName="US_Phone" />
+          <ScalarProperty Name="US_Birth" ColumnName="US_Birth" />
+          <ScalarProperty Name="US_Password" ColumnName="US_Password" />
+          <ScalarProperty Name="US_LastName" ColumnName="US_LastName" />
+          <ScalarProperty Name="US_Name" ColumnName="US_Name" />
+          <ScalarProperty Name="US_Email" ColumnName="US_Email" />
+          <ScalarProperty Name="US_Id" ColumnName="US_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cart">
+      <EntityTypeMapping TypeName="ZOOM3Model.Cart">
+        <MappingFragment StoreEntitySet="Cart">
+          <ScalarProperty Name="C_PH_Id" ColumnName="C_PH_Id" />
+          <ScalarProperty Name="C_US_Id" ColumnName="C_US_Id" />
+          <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

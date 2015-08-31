@@ -1,0 +1,50 @@
+﻿
+@if (Session["UserName"] != null)
+{
+   <ul class="nav navbar-right top-nav">
+        <!--Alerts -->
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="badge">@Session["Notifications"]</span> <b class="caret"></b></a>
+          
+            <ul class="dropdown-menu alert-dropdown" style="width: 300px;">
+                @foreach (var i in @ViewBag.noti)
+                {
+                    <li>
+                        <a href="~/Notifications/Notifications/@i.NOT_Id">@i.NOT_Description <span class="label label-primary">@i.NOT_Date.Day / @i.NOT_Date.Month</span></a>
+                    </li>
+                    <li class="divider"></li>
+                }
+                
+            </ul>
+        </li>
+       <li class="dropdown">
+           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Hello, @Session["UserName"]! <b class="caret"></b></a>
+           <ul class="dropdown-menu">
+               <li>@Html.ActionLink("Mi Perfil", "ProfileInfo", "Profile", "", htmlAttributes: new { id = Session["UserId"] })</li>
+               <li>@Html.ActionLink("Mis Fotos", "MyPhotos", "Profile")</li>
+               <li>@Html.ActionLink("Mercado", "MyMarket", "Profile")</li>
+               <li>@Html.ActionLink("Mis Compras", "MyPurchases", "Profile")</li>
+           </ul>
+       </li>
+       <li>
+           <a href="@Url.Action("LogOff", "Home", new { id = 5 })" title="LogOff">Cerrar Sesión</a>
+               @*@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+               {
+                   @Html.AntiForgeryToken()
+                   <a href="javascript:document.getElementById('logoutForm').submit()" id="logoff" onclick="logoff()">Log off</a>
+                   
+               }*@
+       </li>
+       <li><a href="~/ShoppingCart/CartStep1">Carrito <i class="fa fa-fw fa-shopping-cart"></i><span class="badge">@Session["Cart"]</span></a></li>
+    </ul>
+}
+else
+{
+    <ul class="nav navbar-right top-nav">
+        <li>@Html.ActionLink("Registro", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li><a href="~/ShoppingCart/CartStep1">Carrito <i class="fa fa-fw fa-shopping-cart"></i><span class="badge">@Session["Cart"]</span></a></li>
+    </ul>
+    
+}
+

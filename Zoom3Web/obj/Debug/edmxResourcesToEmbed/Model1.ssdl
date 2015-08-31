@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ZOOM3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="C_Id" />
+    </Key>
+    <Property Name="C_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="C_US_Id" Type="int" Nullable="false" />
+    <Property Name="C_PH_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CAT_Id" />
+    </Key>
+    <Property Name="CAT_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CAT_Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CreditCard">
+    <Key>
+      <PropertyRef Name="CC_Id" />
+    </Key>
+    <Property Name="CC_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CC_Number" Type="nvarchar" MaxLength="14" />
+    <Property Name="CC_CVV2" Type="int" />
+    <Property Name="CC_Name" Type="varchar" MaxLength="50" />
+    <Property Name="CC_Primary" Type="bit" />
+    <Property Name="CC_SaveCard" Type="bit" />
+    <Property Name="CC_CT_Id" Type="int" />
+    <Property Name="CC_U_Id" Type="int" Nullable="false" />
+    <Property Name="CC_AccountNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="CC_ExpiredMonth" Type="int" />
+    <Property Name="CC_ExpiredYear" Type="int" />
+  </EntityType>
+  <EntityType Name="CreditCardType">
+    <Key>
+      <PropertyRef Name="CT_Id" />
+    </Key>
+    <Property Name="CT_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CT_Type" Type="varchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Email">
+    <Key>
+      <PropertyRef Name="E_Id" />
+    </Key>
+    <Property Name="E_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="E_Template" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Favourites">
+    <Key>
+      <PropertyRef Name="FAV_Id" />
+    </Key>
+    <Property Name="FAV_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FAV_PH_Id" Type="int" Nullable="false" />
+    <Property Name="FAV_US_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Likes">
+    <Key>
+      <PropertyRef Name="LIK_Id" />
+    </Key>
+    <Property Name="LIK_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LIK_US_Id" Type="int" Nullable="false" />
+    <Property Name="LIK_PH_Id" Type="int" Nullable="false" />
+    <Property Name="LIK_ButtonLike" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Notifications">
+    <Key>
+      <PropertyRef Name="NOT_Id" />
+    </Key>
+    <Property Name="NOT_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOT_U_Id" Type="int" Nullable="false" />
+    <Property Name="NOT_NT_Id" Type="int" Nullable="false" />
+    <Property Name="NOT_PH_Id" Type="int" Nullable="false" />
+    <Property Name="NOT_Leido" Type="bit" Nullable="false" />
+    <Property Name="NOT_Tittle" Type="nchar" MaxLength="10" />
+    <Property Name="NOT_Description" Type="nvarchar" MaxLength="50" />
+    <Property Name="NOT_Date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NotificationType">
+    <Key>
+      <PropertyRef Name="NT_Id" />
+    </Key>
+    <Property Name="NT_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NT_Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Photo">
+    <Key>
+      <PropertyRef Name="PH_Id" />
+    </Key>
+    <Property Name="PH_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PH_Title" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="PH_Description" Type="nvarchar(max)" />
+    <Property Name="PH_Price" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="PH_Favourites" Type="int" Nullable="false" />
+    <Property Name="PH_InCart" Type="bit" Nullable="false" />
+    <Property Name="PH_CAT_Id" Type="int" Nullable="false" />
+    <Property Name="PH_US_Id" Type="int" Nullable="false" />
+    <Property Name="PH_Image" Type="image" Nullable="false" />
+    <Property Name="PH_FileName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PH_UploadDate" Type="date" Nullable="false" />
+    <Property Name="PH_InMarket" Type="bit" Nullable="false" />
+    <Property Name="PH_Likes" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Purchases">
+    <Key>
+      <PropertyRef Name="PUR_Id" />
+    </Key>
+    <Property Name="PUR_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PUR_US_Id" Type="int" Nullable="false" />
+    <Property Name="PUR_PH_Id" Type="int" Nullable="false" />
+    <Property Name="PUR_DatePurchase" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="ROL_Id" />
+    </Key>
+    <Property Name="ROL_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ROL_Description" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserData">
+    <Key>
+      <PropertyRef Name="US_Id" />
+    </Key>
+    <Property Name="US_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="US_Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="US_Name" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="US_LastName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="US_Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="US_Birth" Type="date" />
+    <Property Name="US_Phone" Type="int" />
+    <Property Name="RememberMe" Type="bit" Nullable="false" />
+    <Property Name="US_ROL_Id" Type="int" Nullable="false" />
+    <Property Name="US_ConfirmPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="US_ImageProfile" Type="image" />
+    <Property Name="US_HasImage" Type="bit" Nullable="false" />
+    <Property Name="US_NewPassword" Type="nvarchar" MaxLength="50" />
+    <Property Name="US_RegDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Cart_Photo">
+    <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="PH_Id" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="C_PH_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CreditCard_CreditCardType">
+    <End Role="CreditCardType" Type="Self.CreditCardType" Multiplicity="0..1" />
+    <End Role="CreditCard" Type="Self.CreditCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreditCardType">
+        <PropertyRef Name="CT_Id" />
+      </Principal>
+      <Dependent Role="CreditCard">
+        <PropertyRef Name="CC_CT_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CreditCard_User">
+    <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+    <End Role="CreditCard" Type="Self.CreditCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserData">
+        <PropertyRef Name="US_Id" />
+      </Principal>
+      <Dependent Role="CreditCard">
+        <PropertyRef Name="CC_U_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Favourites_Photo">
+    <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
+    <End Role="Favourites" Type="Self.Favourites" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="PH_Id" />
+      </Principal>
+      <Dependent Role="Favourites">
+        <PropertyRef Name="FAV_PH_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_NotificationType">
+    <End Role="NotificationType" Type="Self.NotificationType" Multiplicity="1" />
+    <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NotificationType">
+        <PropertyRef Name="NT_Id" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="NOT_NT_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_Photo">
+    <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
+    <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="PH_Id" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="NOT_PH_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_User">
+    <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+    <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserData">
+        <PropertyRef Name="US_Id" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="NOT_U_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Photo_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CAT_Id" />
+      </Principal>
+      <Dependent Role="Photo">
+        <PropertyRef Name="PH_CAT_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Photo_User">
+    <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+    <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserData">
+        <PropertyRef Name="US_Id" />
+      </Principal>
+      <Dependent Role="Photo">
+        <PropertyRef Name="PH_US_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Purchases_Photo">
+    <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
+    <End Role="Purchases" Type="Self.Purchases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="PH_Id" />
+      </Principal>
+      <Dependent Role="Purchases">
+        <PropertyRef Name="PUR_PH_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserData_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="UserData" Type="Self.UserData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="ROL_Id" />
+      </Principal>
+      <Dependent Role="UserData">
+        <PropertyRef Name="US_ROL_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="ZOOM3ModelStoreContainer">
+    <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CreditCard" EntityType="Self.CreditCard" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CreditCardType" EntityType="Self.CreditCardType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Email" EntityType="Self.Email" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Favourites" EntityType="Self.Favourites" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Likes" EntityType="Self.Likes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NotificationType" EntityType="Self.NotificationType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Photo" EntityType="Self.Photo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Purchases" EntityType="Self.Purchases" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserData" EntityType="Self.UserData" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Cart_Photo" Association="Self.FK_Cart_Photo">
+      <End Role="Photo" EntitySet="Photo" />
+      <End Role="Cart" EntitySet="Cart" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CreditCard_CreditCardType" Association="Self.FK_CreditCard_CreditCardType">
+      <End Role="CreditCardType" EntitySet="CreditCardType" />
+      <End Role="CreditCard" EntitySet="CreditCard" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CreditCard_User" Association="Self.FK_CreditCard_User">
+      <End Role="UserData" EntitySet="UserData" />
+      <End Role="CreditCard" EntitySet="CreditCard" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Favourites_Photo" Association="Self.FK_Favourites_Photo">
+      <End Role="Photo" EntitySet="Photo" />
+      <End Role="Favourites" EntitySet="Favourites" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_NotificationType" Association="Self.FK_Notifications_NotificationType">
+      <End Role="NotificationType" EntitySet="NotificationType" />
+      <End Role="Notifications" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_Photo" Association="Self.FK_Notifications_Photo">
+      <End Role="Photo" EntitySet="Photo" />
+      <End Role="Notifications" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_User" Association="Self.FK_Notifications_User">
+      <End Role="UserData" EntitySet="UserData" />
+      <End Role="Notifications" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Photo_Category" Association="Self.FK_Photo_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Photo" EntitySet="Photo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Photo_User" Association="Self.FK_Photo_User">
+      <End Role="UserData" EntitySet="UserData" />
+      <End Role="Photo" EntitySet="Photo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Purchases_Photo" Association="Self.FK_Purchases_Photo">
+      <End Role="Photo" EntitySet="Photo" />
+      <End Role="Purchases" EntitySet="Purchases" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserData_Roles" Association="Self.FK_UserData_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="UserData" EntitySet="UserData" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

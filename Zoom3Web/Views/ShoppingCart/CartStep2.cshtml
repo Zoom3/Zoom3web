@@ -1,0 +1,239 @@
+﻿@model Zoom3Web.UserData
+
+@{
+    ViewBag.Title = "Compra - Paso 2";
+}
+
+<h2>Compra</h2>
+<hr/>
+
+
+<ul class="breadcrumb">
+    <li><a href="/ShoppingCart/CartStep1">Compra - Paso 1</a></li>
+    <li class="active">Compra - Paso 2</li>
+</ul>
+
+<div class="col-md-6 col-xs-12 col-sm-6 resume">
+    <div class=" panel panel-info">
+        <div class="panel-heading">Resumen Compra</div>
+        <div class="panel-body">
+            <table class="table table-responsive table-striped">
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                @foreach (var i in Model.Photo.Where(p => p.PH_Price != 0))
+                {
+                    <tr>
+
+                        <td>@i.PH_Title</td>
+                        <td>@i.UserData.US_Name @i.UserData.US_LastName</td>
+                        <td>@i.PH_Price €</td>
+
+                    </tr>
+                }
+                <tr>
+                    <td>Total</td>
+                    <td></td>
+                    <td>@ViewBag.Total €</td>
+                </tr>
+
+            </table>
+
+        </div>
+        </div>
+    </div>
+
+        @if (@Model.CreditCard.Count() > 1)
+        {
+            if (@Model.CreditCard.Single().CC_Number != null)
+            {
+                <div class="col-md-6 col-xs-12 col-sm-6 credit-card-form panel panel-default" id="originalCreditCard">
+                    <div class="panel-heading">Información Tarjeta de Crédito</div>
+                    <div class="panel-body">
+                        <dl>
+                            <dt>@Html.DisplayName("Titular")</dt>
+                            <dd>@Html.DisplayFor(model => model.CreditCard.Single().CC_Name)</dd>
+
+                            <dt>@Html.DisplayName("Tarjeta")</dt>
+                            <dd>@Html.DisplayFor(model => model.CreditCard.Single().CreditCardType.CT_Type)</dd>
+
+                            <dt>@Html.DisplayName("Número de Tarjeta")</dt>
+                            <dd>@Html.DisplayFor(model => model.CreditCard.Single().CC_Number)</dd>
+
+                            <dt>@Html.DisplayName("Caducidad (Mes/Año)")</dt>
+                            <dd>@Html.DisplayFor(model => model.CreditCard.Single().CC_ExpiredMonth)</dd>
+                            <dd>@Html.DisplayFor(model => model.CreditCard.Single().CC_ExpiredYear)</dd>
+
+                            <dt>@Html.DisplayName("CVV")</dt>
+                            <dd>@Html.DisplayFor(model => model.CreditCard.Single().CC_CVV2)<span style="color:white;">.</span></dd>
+
+                        </dl>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                @Html.ActionLink("Comprar", "BuyConfirmation")
+                                @*<input type="submit" value="Comprar" class="btn btn-primary" />*@
+                                <a href="#" class="btn btn-info" onclick="addOtherCard()">Utilizar Otra Tarjeta</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-md-6 col-xs-12 col-sm-6 credit-card-form">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Información Tarjeta de Crédito </div>
+                    <div class="panel-body">
+                        @using (Html.BeginForm("CartStep2", "ShoppingCart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+
+                            <div class="form-horizontal cc-edit">
+                                <h4>Tarjeta de Crédito <i class="fa fa-cc-discover"></i> <i class="fa fa-cc-visa"></i> <i class="fa fa-cc-mastercard"></i> <i class="fa fa-cc-amex"></i></h4>
+                                <hr />
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.Label("Titular", new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(model => model.CreditCard.Single().CC_Name, new { @class = "form-control", @placeholder = "Titular" })
+                                        @Html.ValidationMessageFor(model => model.CreditCard.Single().CC_Name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                @*<div class="form-group">
+                                        @Html.Label("Tarjeta", new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownList("CC_CT_Id", null, htmlAttributes: new { @class = "form-control" })
+                                        </div>
+                                    </div>*@
+
+                                <div class="form-group">
+                                    @Html.Label("Número de Tarjeta", new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(model => model.CreditCard.Single().CC_Number, new { @class = "form-control", @placeholder = "No. Tarjeta" })
+                                        @Html.ValidationMessageFor(model => model.CreditCard.Single().CC_Number, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group form-inline form-cc">
+                                    @Html.Label("Caducidad (M/A)", new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(model => model.CreditCard.Single().CC_ExpiredMonth, new { @class = "form-control", @placeholder = "Mes" })
+                                        @Html.ValidationMessageFor(model => model.CreditCard.Single().CC_ExpiredMonth, "", new { @class = "text-danger" })
+                                        /
+                                        @Html.TextBoxFor(model => model.CreditCard.Single().CC_ExpiredYear, new { @class = "form-control", @placeholder = "Año" })
+                                        @Html.ValidationMessageFor(model => model.CreditCard.Single().CC_ExpiredYear, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group form-cc">
+                                    @Html.Label("CVV", new { @class = "col-md-4 control-label" })
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(model => model.CreditCard.Single().CC_CVV2, new { @class = "form-control", @placeholder = "CVV2" })
+                                        @Html.ValidationMessageFor(model => model.CreditCard.Single().CC_CVV2, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="checkbox form-group">
+                                    <label class="col-md-5 control-label"></label>
+                                    @Html.CheckBox("CC_SaveCard", Model.CreditCard.Single().CC_SaveCard) Guardar Tarjeta
+                                    @*<input type="checkbox" id="CC_SaveCard"> Guardar Tarjeta*@
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-9 col-md-10">
+                                        <input type="submit" value="Comprar" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
+
+
+
+        <div class="col-md-6 col-xs-12 col-sm-6 credit-card-form" id="otherCreditCard" style="display:none;">
+            <div class="panel panel-default">
+                <div class="panel-heading">Panel heading</div>
+                <div class="panel-body">
+                    @using (Html.BeginForm(/*"CartStep2", "ShoppingCart", FormMethod.Post, new { enctype = "multipart/form-data" }*/))
+                    {
+
+                        <div class="form-horizontal well cc-edit cc-edit">
+                            <h4>Tarjeta de Crédito <i class="fa fa-cc-discover"></i> <i class="fa fa-cc-visa"></i> <i class="fa fa-cc-mastercard"></i> <i class="fa fa-cc-amex"></i></h4>
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.Label("Titular", new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(model => model.CreditCard.Single().CC_Name, new { @class = "form-control", @placeholder = "Titular" })
+                                    @Html.ValidationMessageFor(model => model.CreditCard.Single().CC_Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            @*<div class="form-group">
+                                    @Html.Label("Tarjeta", new { @class = "col-md-2 control-label" })
+                                    <div class="col-md-10">
+                                        @Html.DropDownList("CC_CT_Id", null, htmlAttributes: new { @class = "form-control" })
+                                    </div>
+                                </div>*@
+
+                            <div class="form-group">
+                                @Html.Label("Número de Tarjeta", new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(model => model.CreditCard.Single().CC_Number, new { @class = "form-control", @placeholder = "No.Tarjeta" })
+                                    @Html.ValidationMessageFor(model => model.CreditCard.Single().CC_Number, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group form-inline form-cc">
+                                @Html.Label("Caducidad (M/A)", new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(model => model.CreditCard.Single().CC_ExpiredMonth, new { @class = "form-control", @placeholder = "Mes" })
+                                    @Html.ValidationMessageFor(model => model.CreditCard.Single().CC_ExpiredMonth, "", new { @class = "text-danger" })
+                                    /
+                                    @Html.TextBoxFor(model => model.CreditCard.Single().CC_ExpiredYear, new { @class = "form-control", @placeholder = "Año" })
+                                    @Html.ValidationMessageFor(model => model.CreditCard.Single().CC_ExpiredYear, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group form-cc">
+                                @Html.Label("CVV", new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(model => model.CreditCard.Single().CC_CVV2, new { @class = "form-control", @placeholder = "CVV2" })
+                                    @Html.ValidationMessageFor(model => model.CreditCard.Single().CC_CVV2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="checkbox form-group">
+                                <label class="col-md-5 control-label"></label>
+                                @Html.CheckBox("CC_SaveCard", Model.CreditCard.Single().CC_SaveCard) Guardar Tarjeta
+                                @*<input type="checkbox" id="CC_SaveCard"> Guardar Tarjeta*@
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-9 col-md-10">
+                                    <input type="submit" value="Comprar" class="btn btn-primary" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+
+<script>
+    function addOtherCard() {
+        document.getElementById("originalCreditCard").style.display = "none";
+        document.getElementById("otherCreditCard").style.display = "block";
+    }
+</script>

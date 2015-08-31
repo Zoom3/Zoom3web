@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Zoom3Web.Photo>
+
+@{
+    ViewBag.Title = "Compra - Paso 1";
+}
+
+<h2>Proceso de Compra - Paso 1</h2>
+<hr/>
+<ul class="breadcrumb">
+    <li class="active">Compra - Paso 1</li>
+</ul>
+<table class="table table-responsive table-striped">
+    <thead>
+        <tr>
+            <th>Foto</th>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Precio</th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach(var i in Model){
+        <tr>
+            <td>
+                <div class="thumbnail" style="max-width:150px;">
+                    <img src="@Url.Action("GetImage", "Home", new { id = i.PH_Id })" alt="@i.PH_Title" />
+                </div>
+            </td>
+            <td>@i.PH_Title</td>
+            <td>@i.UserData.US_Name @i.UserData.US_LastName</td>
+            <td>@i.PH_Price €</td>
+            <td><a href="@Url.Action("DeleteItem", "ShoppingCart", new { id = i.PH_Id })" class="btn btn-danger">Eliminar</a>
+</td>
+        </tr>
+    }
+    <tr>
+        <td>Total</td>
+        <td></td>
+        <td></td>
+        <td>@ViewBag.Total €</td>
+        <td></td>
+    </tr>
+
+</table>
+
+
+<div class="form-group">
+    <div class="col-md-offset-10 col-md-10">
+        <a href="~/ShoppingCart/CartStep2" class="btn btn-info">Continuar</a>
+    </div>
+</div>
+
+@*<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+
+        <input type="hidden" name="cmd" value="_xclick" />
+        <input type="hidden" name="business" value="5GA5WD9BLJ3QW" />
+     
+    </form>*@
+
+
+@*<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+    <input name="cmd" type="hidden" value="_cart" />
+    <input name="upload" type="hidden" value="1" />
+    <input name="business" type="hidden" value="zoomthreeweb@gmail.com" />
+    <input name="currency_code" type="hidden" value="EUR" />
+
+
+    <input name="return" type="hidden" value="http://localhost:51065/ShoppingCart/BuyConfirmation" />
+    <input name="notify_url" type="hidden" value="http://localhost:51065/Error/ErrorPage" />
+
+@{
+    int counter = 1;
+    <input name="rm" type="hidden" value="2" />
+
+    foreach (var i in Model)
+    {
+        <input name="item_number_@counter" type="hidden" value="@i.PH_Title-@i.PH_Id" />
+        <input name="item_name_@counter" type="hidden" value="Foto: @i.PH_Title - by @i.UserData.US_Name @i.UserData.US_LastName" />
+        <input name="amount_@counter" type="hidden" value="@i.PH_Price" />
+        <input name="quantity_@counter" type="hidden" value="1" />
+        
+        counter = counter + 1;
+    }
+}  
+
+    <input type="submit" value="Comprar" class="btn btn-primary" />
+
+</form>*@
+

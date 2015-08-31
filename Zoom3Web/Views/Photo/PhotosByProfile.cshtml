@@ -1,0 +1,67 @@
+﻿@model Zoom3Web.UserData
+@{
+    ViewBag.Title = "Fotos";
+}
+<div class="user-nav">
+    <div class="row user-sup">
+        <div class="col-md-2 col-sm-4 image-responsive">
+            <div class="thumbnail">
+                <a href="#">
+                    @if (Model.US_HasImage == false)
+                    {
+                        <img src="~/Images/Foto 7-6-15 17 01 55.jpg" />
+                    }
+                    else
+                    {
+                        <img src="@Url.Action("GetImage", "Profile", new { id = Model.US_Id })" alt="Hola" />
+                    }
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 name-responsive">
+            <h2>@Model.US_Name @Model.US_LastName</h2>
+            <p>@Model.Photo.Count() Fotos</p>
+        </div>
+      
+    </div>
+   
+</div>
+<section id="photoContainer">
+
+    @foreach (var i in Model.Photo)
+    {
+        <div class="col-xs-6 col-md-3">
+            <a href="~/Photo/PhotosByProfileViewer/@i.PH_Id" class="photo-Title">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h4>@i.PH_Title</h4>
+                        <p>@i.PH_Description</p>
+                        @*<p>
+                            <a href="#" class="" rel="tooltip" title="Zoom">@i.UserData.US_Name  @i.UserData.US_LastName</a>
+                        </p>*@
+                    </div>
+                    <img src="@Url.Action("GetImage", "Home", new { id = i.PH_Id })" alt="@i.PH_Title" />
+                </div>
+            </a>
+        </div>
+
+    }
+
+</section>
+
+<style>
+    #page-wrapper {
+        padding: 0px;
+    }
+
+    .container-fluid {
+        padding-right: 0px;
+        padding-left: 0px;
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    .user-nav{
+        border-bottom: 5px solid silver;
+    }
+</style>

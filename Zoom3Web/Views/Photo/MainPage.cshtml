@@ -1,0 +1,75 @@
+﻿@model List<Zoom3Web.Photo>
+@{
+    ViewBag.Title = "Photos";
+}
+<div class="col-md-9">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="max-width:70%;">
+        <!-- Indicators -->
+        @{int idPhoto = ViewBag.idMainPhoto;}
+        <ol class="carousel-indicators">
+            @foreach (var i in Model)
+            {
+                <li data-target="#carousel-example-generic" data-slide-to="@i.PH_Id"></li>
+            }
+        </ol>
+        <!-- Indicators -->
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            @foreach (var i in Model)
+            {
+                if (@i.PH_Id == idPhoto)
+                {
+                    <div class="item active">
+                        <img src="@Url.Action("GetImage", "Home", new { id = i.PH_Id })" alt="@i.PH_Title" />
+                    </div>
+
+                }
+                else
+                {
+                    <div class="item">
+                        <img src="@Url.Action("GetImage", "Home", new { id = i.PH_Id })" alt="@i.PH_Title" />
+                    </div>
+                }
+
+            }
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+
+    </div>
+
+</div>
+<div class="col-md-3">
+
+    <h2>Tittle</h2>
+</div>
+<style>
+    #page-wrapper {
+        padding: 0px;
+    }
+
+    .container-fluid {
+        padding-right: 0px;
+        padding-left: 0px;
+        margin-right: 0;
+        margin-left: 0;
+    }
+</style>
+
+
+<script>
+    $(document).ready(function () {
+        $("#carousel-example-generic").carousel({ interval: 1000000000 });
+
+        $("#carousel-example-generic").carousel("pause");
+        $("#carousel-example-generic").carousel(idPhoto);
+    });
+</script>

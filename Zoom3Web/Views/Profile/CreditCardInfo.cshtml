@@ -1,0 +1,75 @@
+﻿@model Zoom3Web.CreditCard
+@{
+    ViewBag.Title = "Información Bancaria";
+}
+
+@Html.Partial("_ProfileMenu")
+<fieldset class="profile-container">
+    <legend>Datos Bancarios</legend>
+    <div class="profile-left col-md-7">
+        @if (Model.CC_Number != null)
+        {
+            <h3>Información Tarjeta de Crédito</h3>
+            <hr />
+            <dl>
+                <dt>@Html.DisplayName("Titular")</dt>
+                <dd>@Html.DisplayFor(model => model.CC_Name)</dd>
+
+                @*<dt>@Html.DisplayName("Tarjeta")</dt>
+                <dd>@Html.DisplayFor(model => model.CreditCardType.CT_Type)</dd>*@
+
+                <dt>@Html.DisplayName("Número de Tarjeta")</dt>
+                <dd>@Html.DisplayFor(model => model.CC_Number)</dd>
+
+                <dt>@Html.DisplayName("Caducidad (Mes/Año)")</dt>
+                <dd>@Html.DisplayFor(model => model.CC_ExpiredMonth) / @Html.DisplayFor(model => model.CC_ExpiredYear)</dd>
+
+                <dt>@Html.DisplayName("CVV")</dt>
+                <dd>@Html.DisplayFor(model => model.CC_CVV2)<span style="color:white;">.</span></dd>
+
+            </dl>
+        }
+        else
+        {
+            <p>No hay información de tarjetas de crédito</p>
+        }
+
+        <hr />
+        <h3>Número de Cuenta</h3>
+        <hr />
+        <dl>
+            
+            <dt>@Html.DisplayName("Número de Cuenta")</dt>
+            <dd>@Html.DisplayFor(model => model.CC_AccountNumber)</dd>
+
+        </dl>
+    </div>
+    <div class="profile-right col-md-5">
+        @if (Model.CC_Number != null)
+        {
+            <p><a href="/Profile/CreditCardEdit/@Model.CC_Id" id="@Model.CC_Id" class="btn btn-info">Editar Tarjeta</a></p>
+        }
+        @if (Model.CC_AccountNumber != null)
+        {
+            <p><a href="/Profile/EditAccountNumber/@Model.CC_Id" id="@Model.CC_Id" class="btn btn-info">Editar Número Cuenta</a></p>
+        }
+        @if (Model.CC_AccountNumber == null)
+        {
+            <p>@Html.ActionLink("Añadir Cuenta", "AddAccount", "", new { /* id=Model.PrimaryKey, */@class = "btn btn-info" }) </p>
+        }
+        
+        @if (Model.CC_Number != null)
+        {
+            <p><a href="@Url.Action("DeleteCreditCard", "Profile", new { id = Model.CC_Id })" class="btn btn-danger" title="Delete">Eliminar Tarjeta</a></p>
+        }
+        @if (Model.CC_AccountNumber != null)
+        {
+            <p> <a href="@Url.Action("DeleteAccountNumber", "Profile", new { id = Model.CC_Id })" class="btn btn-danger" title="Delete">Eliminar Cuenta</a> </p>
+        }
+       
+    </div>
+</fieldset>
+
+
+
+

@@ -1,0 +1,40 @@
+﻿@model Zoom3Web.Models.CreditCardViewModel
+@{
+    ViewBag.Title = "Editar Número de Cuenta";
+}
+
+@Html.Partial("_ProfileMenu")
+
+@using (Html.BeginForm())
+{
+
+    <div class="form-horizontal well cc-edit">
+        <h4>Editar Número de Cuenta</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-inline form-group">
+            @Html.Label("Número de Cuenta", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.CC_Entity, new { @class = "form-control ac_midth", @placeholder= "Entidad" })
+                @Html.ValidationMessageFor(model => model.CC_Entity, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(model => model.CC_Office, new { @class = "form-control ac_midth", @placeholder = "Oficina" })
+                @Html.ValidationMessageFor(model => model.CC_Office, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(model => model.CC_ControlDigit, new { @class = "form-control ac_small", @placeholder = "D.C" })
+                @Html.ValidationMessageFor(model => model.CC_ControlDigit, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(model => model.CC_ANumber, new { @class = "form-control", @placeholder = "Nº Cuenta" })
+                @Html.ValidationMessageFor(model => model.CC_ANumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-5 col-md-10">
+                <input type="submit" value="Guardar" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+
+
+

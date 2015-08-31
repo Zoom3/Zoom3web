@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ZOOM3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CAT_Id" />
+    </Key>
+    <Property Name="CAT_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CAT_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Photo" Relationship="ZOOM3Model.FK_Photo_Category" FromRole="Category" ToRole="Photo" />
+  </EntityType>
+  <EntityType Name="CreditCardType">
+    <Key>
+      <PropertyRef Name="CT_Id" />
+    </Key>
+    <Property Name="CT_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CT_Type" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CreditCard" Relationship="ZOOM3Model.FK_CreditCard_CreditCardType" FromRole="CreditCardType" ToRole="CreditCard" />
+  </EntityType>
+  <EntityType Name="Favourites">
+    <Key>
+      <PropertyRef Name="FAV_Id" />
+    </Key>
+    <Property Name="FAV_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FAV_PH_Id" Type="Int32" Nullable="false" />
+    <Property Name="FAV_US_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Photo" Relationship="ZOOM3Model.FK_Favourites_Photo" FromRole="Favourites" ToRole="Photo" />
+  </EntityType>
+  <EntityType Name="NotificationType">
+    <Key>
+      <PropertyRef Name="NT_Id" />
+    </Key>
+    <Property Name="NT_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NT_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Notifications" Relationship="ZOOM3Model.FK_Notifications_NotificationType" FromRole="NotificationType" ToRole="Notifications" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="ROL_Id" />
+    </Key>
+    <Property Name="ROL_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ROL_Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="UserData" Relationship="ZOOM3Model.FK_UserData_Roles" FromRole="Roles" ToRole="UserData" />
+  </EntityType>
+  <EntityContainer Name="ZOOM3Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Category" EntityType="Self.Category" />
+    <EntitySet Name="CreditCardType" EntityType="Self.CreditCardType" />
+    <EntitySet Name="Favourites" EntityType="Self.Favourites" />
+    <EntitySet Name="NotificationType" EntityType="Self.NotificationType" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" />
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ZOOM3Model.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(ZOOM3Model.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="Likes" EntityType="ZOOM3Model.Likes" />
+    <EntitySet Name="Photo" EntityType="ZOOM3Model.Photo" />
+    <AssociationSet Name="FK_Photo_Category" Association="ZOOM3Model.FK_Photo_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Photo" EntitySet="Photo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Favourites_Photo" Association="ZOOM3Model.FK_Favourites_Photo">
+      <End Role="Photo" EntitySet="Photo" />
+      <End Role="Favourites" EntitySet="Favourites" />
+    </AssociationSet>
+    <EntitySet Name="CreditCard" EntityType="ZOOM3Model.CreditCard" />
+    <AssociationSet Name="FK_CreditCard_CreditCardType" Association="ZOOM3Model.FK_CreditCard_CreditCardType">
+      <End Role="CreditCardType" EntitySet="CreditCardType" />
+      <End Role="CreditCard" EntitySet="CreditCard" />
+    </AssociationSet>
+    <EntitySet Name="Email" EntityType="ZOOM3Model.Email" />
+    <EntitySet Name="Notifications" EntityType="ZOOM3Model.Notifications" />
+    <EntitySet Name="Purchases" EntityType="ZOOM3Model.Purchases" />
+    <AssociationSet Name="FK_Notifications_NotificationType" Association="ZOOM3Model.FK_Notifications_NotificationType">
+      <End Role="NotificationType" EntitySet="NotificationType" />
+      <End Role="Notifications" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_Photo" Association="ZOOM3Model.FK_Notifications_Photo">
+      <End Role="Photo" EntitySet="Photo" />
+      <End Role="Notifications" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Purchases_Photo" Association="ZOOM3Model.FK_Purchases_Photo">
+      <End Role="Photo" EntitySet="Photo" />
+      <End Role="Purchases" EntitySet="Purchases" />
+    </AssociationSet>
+    <EntitySet Name="UserData" EntityType="ZOOM3Model.UserData" />
+    <AssociationSet Name="FK_CreditCard_User" Association="ZOOM3Model.FK_CreditCard_User">
+      <End Role="UserData" EntitySet="UserData" />
+      <End Role="CreditCard" EntitySet="CreditCard" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_User" Association="ZOOM3Model.FK_Notifications_User">
+      <End Role="UserData" EntitySet="UserData" />
+      <End Role="Notifications" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Photo_User" Association="ZOOM3Model.FK_Photo_User">
+      <End Role="UserData" EntitySet="UserData" />
+      <End Role="Photo" EntitySet="Photo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserData_Roles" Association="ZOOM3Model.FK_UserData_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="UserData" EntitySet="UserData" />
+    </AssociationSet>
+    <EntitySet Name="Cart" EntityType="ZOOM3Model.Cart" />
+    <AssociationSet Name="FK_Cart_Photo" Association="ZOOM3Model.FK_Cart_Photo">
+      <End Role="Photo" EntitySet="Photo" />
+      <End Role="Cart" EntitySet="Cart" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="Likes">
+    <Key>
+      <PropertyRef Name="LIK_Id" />
+    </Key>
+    <Property Name="LIK_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LIK_US_Id" Type="Int32" Nullable="false" />
+    <Property Name="LIK_PH_Id" Type="Int32" Nullable="false" />
+    <Property Name="LIK_ButtonLike" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Photo">
+    <Key>
+      <PropertyRef Name="PH_Id" />
+    </Key>
+    <Property Name="PH_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PH_Title" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="PH_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PH_Price" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="PH_Favourites" Type="Int32" Nullable="false" />
+    <Property Name="PH_InCart" Type="Boolean" Nullable="false" />
+    <Property Name="PH_CAT_Id" Type="Int32" Nullable="false" />
+    <Property Name="PH_US_Id" Type="Int32" Nullable="false" />
+    <Property Name="PH_Image" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="PH_FileName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PH_UploadDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="PH_InMarket" Type="Boolean" Nullable="false" />
+    <Property Name="PH_Likes" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="ZOOM3Model.FK_Photo_Category" FromRole="Photo" ToRole="Category" />
+    <NavigationProperty Name="Favourites" Relationship="ZOOM3Model.FK_Favourites_Photo" FromRole="Photo" ToRole="Favourites" />
+    <NavigationProperty Name="Notifications" Relationship="ZOOM3Model.FK_Notifications_Photo" FromRole="Photo" ToRole="Notifications" />
+    <NavigationProperty Name="Purchases" Relationship="ZOOM3Model.FK_Purchases_Photo" FromRole="Photo" ToRole="Purchases" />
+    <NavigationProperty Name="UserData" Relationship="ZOOM3Model.FK_Photo_User" FromRole="Photo" ToRole="UserData" />
+    <NavigationProperty Name="Cart" Relationship="ZOOM3Model.FK_Cart_Photo" FromRole="Photo" ToRole="Cart" />
+  </EntityType>
+  <Association Name="FK_Photo_Category">
+    <End Type="ZOOM3Model.Category" Role="Category" Multiplicity="1" />
+    <End Type="ZOOM3Model.Photo" Role="Photo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CAT_Id" />
+      </Principal>
+      <Dependent Role="Photo">
+        <PropertyRef Name="PH_CAT_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Favourites_Photo">
+    <End Type="ZOOM3Model.Photo" Role="Photo" Multiplicity="1" />
+    <End Type="ZOOM3Model.Favourites" Role="Favourites" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="PH_Id" />
+      </Principal>
+      <Dependent Role="Favourites">
+        <PropertyRef Name="FAV_PH_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CreditCard">
+    <Key>
+      <PropertyRef Name="CC_Id" />
+    </Key>
+    <Property Name="CC_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CC_Number" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+    <Property Name="CC_CVV2" Type="Int32" />
+    <Property Name="CC_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CC_Primary" Type="Boolean" />
+    <Property Name="CC_SaveCard" Type="Boolean" />
+    <Property Name="CC_CT_Id" Type="Int32" />
+    <Property Name="CC_U_Id" Type="Int32" Nullable="false" />
+    <Property Name="CC_AccountNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CC_ExpiredMonth" Type="Int32" />
+    <Property Name="CC_ExpiredYear" Type="Int32" />
+    <NavigationProperty Name="CreditCardType" Relationship="ZOOM3Model.FK_CreditCard_CreditCardType" FromRole="CreditCard" ToRole="CreditCardType" />
+    <NavigationProperty Name="UserData" Relationship="ZOOM3Model.FK_CreditCard_User" FromRole="CreditCard" ToRole="UserData" />
+  </EntityType>
+  <Association Name="FK_CreditCard_CreditCardType">
+    <End Type="ZOOM3Model.CreditCardType" Role="CreditCardType" Multiplicity="0..1" />
+    <End Type="ZOOM3Model.CreditCard" Role="CreditCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreditCardType">
+        <PropertyRef Name="CT_Id" />
+      </Principal>
+      <Dependent Role="CreditCard">
+        <PropertyRef Name="CC_CT_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Email">
+    <Key>
+      <PropertyRef Name="E_Id" />
+    </Key>
+    <Property Name="E_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="E_Template" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Notifications">
+    <Key>
+      <PropertyRef Name="NOT_Id" />
+    </Key>
+    <Property Name="NOT_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOT_U_Id" Type="Int32" Nullable="false" />
+    <Property Name="NOT_NT_Id" Type="Int32" Nullable="false" />
+    <Property Name="NOT_PH_Id" Type="Int32" Nullable="false" />
+    <Property Name="NOT_Leido" Type="Boolean" Nullable="false" />
+    <Property Name="NOT_Tittle" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="NOT_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NOT_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="NotificationType" Relationship="ZOOM3Model.FK_Notifications_NotificationType" FromRole="Notifications" ToRole="NotificationType" />
+    <NavigationProperty Name="Photo" Relationship="ZOOM3Model.FK_Notifications_Photo" FromRole="Notifications" ToRole="Photo" />
+    <NavigationProperty Name="UserData" Relationship="ZOOM3Model.FK_Notifications_User" FromRole="Notifications" ToRole="UserData" />
+  </EntityType>
+  <EntityType Name="Purchases">
+    <Key>
+      <PropertyRef Name="PUR_Id" />
+    </Key>
+    <Property Name="PUR_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PUR_US_Id" Type="Int32" Nullable="false" />
+    <Property Name="PUR_PH_Id" Type="Int32" Nullable="false" />
+    <Property Name="PUR_DatePurchase" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Photo" Relationship="ZOOM3Model.FK_Purchases_Photo" FromRole="Purchases" ToRole="Photo" />
+  </EntityType>
+  <Association Name="FK_Notifications_NotificationType">
+    <End Type="ZOOM3Model.NotificationType" Role="NotificationType" Multiplicity="1" />
+    <End Type="ZOOM3Model.Notifications" Role="Notifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NotificationType">
+        <PropertyRef Name="NT_Id" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="NOT_NT_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_Photo">
+    <End Type="ZOOM3Model.Photo" Role="Photo" Multiplicity="1" />
+    <End Type="ZOOM3Model.Notifications" Role="Notifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="PH_Id" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="NOT_PH_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Purchases_Photo">
+    <End Type="ZOOM3Model.Photo" Role="Photo" Multiplicity="1" />
+    <End Type="ZOOM3Model.Purchases" Role="Purchases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="PH_Id" />
+      </Principal>
+      <Dependent Role="Purchases">
+        <PropertyRef Name="PUR_PH_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="UserData">
+    <Key>
+      <PropertyRef Name="US_Id" />
+    </Key>
+    <Property Name="US_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="US_Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="US_Name" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="US_LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="US_Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="US_Birth" Type="DateTime" Precision="0" />
+    <Property Name="US_Phone" Type="Int32" />
+    <Property Name="RememberMe" Type="Boolean" Nullable="false" />
+    <Property Name="US_ROL_Id" Type="Int32" Nullable="false" />
+    <Property Name="US_ConfirmPassword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="US_ImageProfile" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="US_HasImage" Type="Boolean" Nullable="false" />
+    <Property Name="US_NewPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="US_RegDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="CreditCard" Relationship="ZOOM3Model.FK_CreditCard_User" FromRole="UserData" ToRole="CreditCard" />
+    <NavigationProperty Name="Notifications" Relationship="ZOOM3Model.FK_Notifications_User" FromRole="UserData" ToRole="Notifications" />
+    <NavigationProperty Name="Photo" Relationship="ZOOM3Model.FK_Photo_User" FromRole="UserData" ToRole="Photo" />
+    <NavigationProperty Name="Roles" Relationship="ZOOM3Model.FK_UserData_Roles" FromRole="UserData" ToRole="Roles" />
+  </EntityType>
+  <Association Name="FK_CreditCard_User">
+    <End Type="ZOOM3Model.UserData" Role="UserData" Multiplicity="1" />
+    <End Type="ZOOM3Model.CreditCard" Role="CreditCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserData">
+        <PropertyRef Name="US_Id" />
+      </Principal>
+      <Dependent Role="CreditCard">
+        <PropertyRef Name="CC_U_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_User">
+    <End Type="ZOOM3Model.UserData" Role="UserData" Multiplicity="1" />
+    <End Type="ZOOM3Model.Notifications" Role="Notifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserData">
+        <PropertyRef Name="US_Id" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="NOT_U_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Photo_User">
+    <End Type="ZOOM3Model.UserData" Role="UserData" Multiplicity="1" />
+    <End Type="ZOOM3Model.Photo" Role="Photo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserData">
+        <PropertyRef Name="US_Id" />
+      </Principal>
+      <Dependent Role="Photo">
+        <PropertyRef Name="PH_US_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserData_Roles">
+    <End Type="ZOOM3Model.Roles" Role="Roles" Multiplicity="1" />
+    <End Type="ZOOM3Model.UserData" Role="UserData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="ROL_Id" />
+      </Principal>
+      <Dependent Role="UserData">
+        <PropertyRef Name="US_ROL_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="C_Id" />
+    </Key>
+    <Property Name="C_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="C_US_Id" Type="Int32" Nullable="false" />
+    <Property Name="C_PH_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Photo" Relationship="ZOOM3Model.FK_Cart_Photo" FromRole="Cart" ToRole="Photo" />
+  </EntityType>
+  <Association Name="FK_Cart_Photo">
+    <End Type="ZOOM3Model.Photo" Role="Photo" Multiplicity="1" />
+    <End Type="ZOOM3Model.Cart" Role="Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="PH_Id" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="C_PH_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,55 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<Zoom3Web.Photo>
+
+@{
+    ViewBag.Title = "Administración de Usuarios";
+}
+
+<section class="user-admin">
+    <h2>Administración de Usuarios</h2>
+    <hr />
+
+    <table class="table-responsive table table-striped">
+        <thead>
+            <tr>
+                <th>Foto</th>
+                <th>Id</th>
+                <th>Título</th>
+                <th>Usuario</th>
+                <th>Descripción</th>
+                <th>Categoría</th>
+                <th>Favoritos</th>
+                <th>Likes</th>
+                <th>Nombre Fichero</th>
+                <th>Fecha Subida</th>
+                <th></th>
+            </tr>
+        </thead>
+        @foreach (var ph in Model)
+        {
+            <tr>
+                <td>
+                    <div class="thumbnail" style="max-width:150px;">
+                        <img src="@Url.Action("GetImage", "Home", new { id = ph.PH_Id })" alt="@ph.PH_Title" />
+                    </div>
+                </td>
+                <td>@ph.PH_Id</td>
+                <td>@ph.PH_Title</td>
+                <td>@ph.UserData.US_Name</td>
+                <td>@ph.PH_Description</td>
+                <td>@ph.Category.CAT_Description</td>
+                <td>@ph.PH_Favourites</td>
+                <td>@ph.PH_Likes</td>
+                <td>@ph.PH_FileName</td>
+                <td>@ph.PH_UploadDate</td>
+                <td><a href="@Url.Action("DeletePhoto", "AdminUsers", new { id = ph.PH_Id })" class="btn btn-danger">Eliminar</a></td>
+            </tr>
+        }
+
+    </table>
+    <br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("AdminPhotos",
+    new { page}))
+</section>

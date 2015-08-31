@@ -1,0 +1,69 @@
+﻿@model Zoom3Web.Photo
+@{
+    ViewBag.Title = "Notificaciones";
+}
+
+        <div class="row">
+            <div class="col-md-9">
+                <a href="#" class="thumbnail">
+                    <img src="@Url.Action("GetImage", "Home", new { id = Model.PH_Id })" alt="@Model.PH_Title" />
+                </a>
+            </div>
+            <div class="col-md-3">
+                <h2>@Model.PH_Title</h2>
+                <p>@Model.PH_Description</p>
+                by <a href="@Model.UserData.US_Id">@Model.UserData.US_Name @Model.UserData.US_LastName</a>
+
+                @if (@ViewBag.buttonLike == true)
+                {
+                    <div id="likes" class="row">
+                        <p>@Model.PH_Likes Me Gusta <a href="@Url.Action("SumLike", "Photo", new { id = Model.PH_Id })" class="btn btn-danger btn-sm">Me Gusta</a></p>
+                    </div>
+                }
+                else
+                {
+                    <div id="likes" class="row">
+                        <p>@Model.PH_Likes Me Gusta <a href="@Url.Action("DiminishLike", "Photo", new { id = Model.PH_Id })" class="btn btn-danger btn-sm">Ya No Me Gusta</a></p>
+                    </div>
+                }
+                @if (@ViewBag.buttonFav == true)
+                {
+                    <div id="favs" class="row">
+                        <p>@Model.PH_Favourites FAVs <a href="@Url.Action("AddToFavourites", "Photo", new { id = Model.PH_Id })" class="btn btn-warning btn-sm">Añadir a Favoritos</a></p>
+                    </div>
+                }
+                else
+                {
+
+                    <div id="favs" class="row">
+                        <p>@Model.PH_Favourites FAVs <a href="@Url.Action("RemoveToFavourites", "Photo", new { id = Model.PH_Id })" class="btn btn-warning btn-sm">Quitar de Favoritos</a></p>
+                    </div>
+                }
+
+                @if (Model.PH_Price != 0)
+                {
+                    <div class="row">
+                        <p>@Model.PH_Price € <a href="@Url.Action("AddToCart", "Photo", new { id = Model.PH_Id })" class="btn btn-info btn-sm">Comprar</a></p>
+                    </div>
+                }
+
+            </div>
+        </div>
+
+
+
+
+<style>
+    #page-wrapper {
+        padding: 0px;
+    }
+
+    .container-fluid {
+        padding-right: 0px;
+        padding-left: 0px;
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+   
+</style>

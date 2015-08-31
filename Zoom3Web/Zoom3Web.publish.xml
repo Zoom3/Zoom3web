@@ -1,0 +1,9 @@
+<publishData>
+  <publishProfile
+    publishUrl="https://martah-001-site1.smarterasp.net:8172/msdeploy.axd"
+    msdeploySite="martah-001-site1"
+    destinationAppUrl="http://martah-001-site1.smarterasp.net/"
+    profileName="Default Settings"
+    publishMethod="MSDeploy"
+    userName="ifc\martah-001" />
+</publishData>

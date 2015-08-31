@@ -1,0 +1,92 @@
+﻿@model Zoom3Web.Photo
+@{
+    ViewBag.Title = "Mis Fotos Favoritas";
+}
+
+<div class="row">
+    <div class="col-md-1 button-middle">
+        @{int idp = ViewBag.prev;}
+        @Html.ActionLink("< Prev", "FavouritesView", "Photo", new { id = idp }, new { @class = "btn btn-primary" })
+    </div>
+    <div class="col-md-10 col-xs-10 col-sm-10">
+        <div class="row">
+            <div class="col-md-10 col-xs-12 col-sm-12">
+                <a href="#" class="thumbnail">
+                    <img src="@Url.Action("GetImage", "Home", new { id = Model.PH_Id })" alt="@Model.PH_Title" />
+                </a>
+            </div>
+            <div class="col-md-2 col-xs-12 col-sm-12">
+                <div class="main-photo">
+                    <h2>@Model.PH_Title</h2>
+                    <p>@Model.PH_Description</p>
+                    by <a href="~/Photo/PhotosByProfile/@Model.UserData.US_Id">@Model.UserData.US_Name @Model.UserData.US_LastName</a>
+                </div>
+                <div class="second-photo">
+                    @if (@ViewBag.buttonLike == true)
+                    {
+                    <div id="likes" class="row">
+                        <p>@Model.PH_Likes Me Gusta <a href="@Url.Action("SumLike", "Photo", new { id = Model.PH_Id })" class="btn btn-default btn-sm">Me Gusta</a></p>
+                    </div>
+                    }
+                    else
+                    {
+                    <div id="likes" class="row">
+                        <p>@Model.PH_Likes Me Gusta <a href="@Url.Action("DiminishLike", "Photo", new { id = Model.PH_Id })" class="btn btn-default btn-sm">Ya No Me Gusta</a></p>
+                    </div>
+                    }
+                    @if (@ViewBag.buttonFav == true)
+                    {
+                    <div id="favs" class="row">
+                        <p>@Model.PH_Favourites FAVs <a href="@Url.Action("AddToFavourites", "Photo", new { id = Model.PH_Id })" class="btn btn-primary btn-sm">Añadir a Favoritos</a></p>
+                    </div>
+                    }
+                    else
+                    {
+
+                    <div id="favs" class="row">
+                        <p>@Model.PH_Favourites FAVs <a href="@Url.Action("RemoveToFavourites", "Photo", new { id = Model.PH_Id })" class="btn btn-primary btn-sm">Quitar de Favoritos</a></p>
+                    </div>
+                    }
+                </div>
+
+
+                @if (Model.PH_Price != 0)
+                {
+                <div class="row buy-photo">
+                    <p><b>@Model.PH_Price € </b><a href="@Url.Action("AddToCart", "Photo", new { id = Model.PH_Id })" class="btn btn-info btn-sm">Comprar</a></p>
+                </div>
+                }
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-1 button-middle">
+        @{int idn = ViewBag.next;}
+        @Html.ActionLink("Next >", "FavouritesView", "Photo", new { id = idn }, new { @class = "btn btn-primary" })
+    </div>
+</div>
+
+
+
+<style>
+    #page-wrapper {
+        padding: 0px;
+    }
+
+    .container-fluid {
+        padding-right: 0px;
+        padding-left: 0px;
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    .col-md-10 {
+        width: 79.333%;
+    }
+
+    .col-md-2 {
+        width: 20.667%;
+    }
+</style>

@@ -1,0 +1,53 @@
+﻿
+@{ int usId = Convert.ToInt32(Session["UserId"]); }
+@{bool hasImage = Convert.ToBoolean(Session["ProfilePhoto"]);}
+<div class="user-nav">
+    <div class="row user-sup">
+        <div class="col-md-2 col-sm-4 col-xs-4 image-responsive">
+            <div class="thumbnail">
+                <a href="#">
+                    @if (hasImage == false)
+                    {
+                        <img src="~/Images/Foto 7-6-15 17 01 55.jpg" />
+                    }
+                    else
+                    {
+                        <img src="@Url.Action("GetImage", "Profile", new { id = usId })" alt="Hola" />
+                    }
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-6 name-responsive">
+            <h2>@Session["UserName"] @Session["UserLastname"]</h2>
+            <p>@Session["PhotosNo"] Photos</p>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-2 button-responsive">
+            @Html.ActionLink("Editar Perfil", "EditProfile", "Profile", new { @class = "btn btn-default bot-prof" })
+            @Html.ActionLink("Cambiar Foto Perfil", "ChangeProfileImage", "Profile", new { @class = "btn btn-default bot-prof" })
+        </div>
+    </div>
+        <nav class="navbar" role="navigation">
+            @*navbar-inverse*@
+            <ul class="nav navbar-nav menu-usuario">
+                <li>@Html.ActionLink("Mi Perfil", "ProfileInfo", "Profile")</li>
+                <li>@Html.ActionLink("Mis Fotos", "MyPhotos", "Profile")</li>
+                <li>@Html.ActionLink("Fotos en Venta", "MyMarket", "Profile")</li>
+                <li>@Html.ActionLink("Mis Compras", "MyPurchases", "Profile")</li>
+            </ul>
+        </nav>
+
+</div>
+
+
+<style>
+    #page-wrapper {
+        padding: 0px;
+    }
+
+    .container-fluid {
+        padding-right: 0px;
+        padding-left: 0px;
+        margin-right: 0;
+        margin-left: 0;
+    }
+</style>

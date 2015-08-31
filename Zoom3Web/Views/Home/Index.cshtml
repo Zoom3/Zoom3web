@@ -1,0 +1,54 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<Zoom3Web.Photo>
+@{
+    ViewBag.Title = "Inicio";
+}
+
+<section id="photoContainer" class="row">
+
+    @foreach (var i in Model)
+    {
+        <div class="col-xs-6 col-md-3">
+            <a href="~/Photo/PhotoViewer/@i.PH_Id" class="photo-Title">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h4>@i.PH_Title</h4>
+                        <p>@i.PH_Description</p>
+                        <p>
+                            <a href="~/Photo/PhotosByProfile/@i.UserData.US_Id" rel="tooltip" title="Zoom">@i.UserData.US_Name  @i.UserData.US_LastName</a>
+                        </p>
+                    </div>
+                    <img src="@Url.Action("GetImage", "Home", new { id = i.PH_Id })" alt="@i.PH_Title" />
+                </div>
+            </a>
+        </div>
+
+    }
+
+</section>
+
+<section class="row">
+    <div class="custom-pagination">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page }))
+    </div>
+
+</section>
+
+
+
+<style>
+    #page-wrapper {
+        padding: 0px;
+    }
+
+    .container-fluid {
+        padding-right: 0px;
+        padding-left: 0px;
+        margin-right: 0;
+        margin-left: 0;
+    }
+</style>
+

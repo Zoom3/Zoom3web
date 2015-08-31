@@ -1,0 +1,49 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<Zoom3Web.Photo>
+@{
+    ViewBag.Title = "Mis Compras";
+}
+
+@Html.Partial("_ProfileMenu")
+<div class="purchases">
+    <h2>Mis Compras</h2>
+    <hr/>
+    <table class="table table-responsive table-striped">
+        <thead>
+            <tr>
+                <th>Foto</th>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td>
+                    <div class="thumbnail" style="max-width:150px;">
+                        <img src="@Url.Action("GetImage", "Home", new { id = i.PH_Id })" alt="@i.PH_Title" />
+                    </div>
+                </td>
+                <td>@i.PH_Title</td>
+                <td>@i.UserData.US_Name @i.UserData.US_LastName</td>
+                <td>@i.PH_Price €</td>
+            </tr>
+        }
+
+    </table>
+    <br/>
+    <div class="custom-pagination">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("MyPurchases",
+    new { page }))
+    </div>
+</div>
+<style>
+    div.purchases{
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+</style>

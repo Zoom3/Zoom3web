@@ -1,0 +1,142 @@
+﻿@model Zoom3Web.Models.PhotoViewModel
+
+@{
+    ViewBag.Title = "Subir Foto";
+}
+
+<h2>Subir Foto</h2>
+
+@using (Html.BeginForm("Upload", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+ 
+    <div class="form-horizontal well">
+        <h4>Foto</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Título", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.PH_Title, new { @class = "form-control", @placeholder = "Título" })
+                @Html.ValidationMessageFor(model => model.PH_Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Descripción", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.PH_Description, new { @class = "form-control", @placeholder = "Descripción" })
+                @Html.ValidationMessageFor(model => model.PH_Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.Label("Poner en Venta", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.PH_InMarket)
+                    @Html.ValidationMessageFor(model => model.PH_InMarket, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" style="display: none;" id="priceInput">
+            @Html.Label("Precio (€)", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+
+                @Html.TextBoxFor(model => model.PH_Price, new { @class = "form-control", @Value = "0.00" })
+                @*<div class="input-group-addon">€</div>*@
+                @Html.ValidationMessageFor(model => model.PH_Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.Label("Categoría", new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.DropDownList("PH_CAT_Id", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PH_CAT_Id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+       
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PH_Image, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="PH_Image" id="PH_Image" style="width: 100%;" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Subir" class="btn btn-info" />
+            </div>
+        </div>
+    </div>
+}
+
+<div id="myModal" style="display:none;" class="custom-modal">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" onclick="closeModal()">&times;</button>
+                <h4 class="modal-title">Aviso</h4>
+            </div>
+            <div class="modal-body">
+                <p>Para poner a la venta una fotografía es necesario haber introducido un número de Cuenta</p>
+                <a href="~/Profile/AddAccount">Pulse aquí para introducir ahora</a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeModal()">Cerrar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $("#PH_InMarket").change(function () {
+        var check = document.getElementById("PH_InMarket").checked;
+        if(check == true){
+            document.getElementById("priceInput").style.display = 'block';
+            test();
+        } else {
+            document.getElementById("priceInput").style.display = 'none';
+        }
+        
+    });
+
+    function test() {
+        var user = 5;
+        $.ajax({
+            type: 'POST',
+            url: '/Upload/checkUserAccount',
+            dataType: 'json',
+            data: JSON.stringify(user),
+            success: function (data) {
+                var datos = data.modal;
+                showModal(datos);
+            },
+            error: function (xhr, ajaxOptions, error) {
+                alert(xhr.status);
+                alert('Error: ' + xhr.responseText);
+            }
+        });
+    }
+
+   
+    function showModal(datos){
+        if (datos == false) {
+            document.getElementById("myModal").style.display = "block";
+        }
+    }
+
+    function closeModal() {
+        document.getElementById("myModal").style.display = "none";
+    }
+    
+</script>
+
